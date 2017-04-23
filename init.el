@@ -193,7 +193,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	:init
 	(setq pianobar-username "")
 	(setq pianobar-password "")
-	(setq pianobar-station "18")
+	(setq pianobar-station "2")
 	(autoload 'pianobar "pianobar" nil t)
 	:config
 	(global-set-key (kbd "C-x p p") 'pianobar-play-or-pause)
