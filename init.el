@@ -11,6 +11,13 @@
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 
+;;conservative scrolling
+(setq scroll-step            1
+      scroll-conservatively  10000)
+
+;;use cmd as meta as well
+(setq mac-command-key-is-meta t)
+
 ;; disable splash screen
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -18,15 +25,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(face-font-family-alternatives
-   (quote
-    (("Monospace" "courier" "fixed")
-     ("courier" "CMU Typewriter Text" "fixed")
-     ("Sans Serif" "helv" "helvetica" "arial" "fixed")
-     ("helv" "helvetica" "arial" "fixed"))))
+	 (quote
+		(("Monospace" "courier" "fixed")
+		 ("courier" "CMU Typewriter Text" "fixed")
+		 ("Sans Serif" "helv" "helvetica" "arial" "fixed")
+		 ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   (quote
-    (company-anaconda feature-mode auto-virtualenv haskell-mode markdown-mode lua-mode company flycheck bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+	 (quote
+		(bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -73,7 +80,7 @@
 	:init
 	(global-set-key (kbd "C-x g") 'magit-status))
 
-
+(diminish 'autocomplete-mode)
 ;;flycheck
 (use-package flycheck
   :init
@@ -137,7 +144,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	:init
 	(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 	(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-	(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+	(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  (setq markdown-command "pandoc -s"))
 
 ;;Yaml mode
 (use-package yaml-mode)
@@ -163,7 +171,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 	(add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
 	(add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
-	
+	(eval-after-load "auto-complete"
+		'(add-to-list 'ac-modes 'haskell-interactive-mode))
 	:config
 	;;indent/dedent region
 	(define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
@@ -298,9 +307,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (add-hook 'ruby-mode-hook 
 					(lambda () 
 						(ruby-end-mode 1)
-						(diminish 'ruby-end-mode)
-						(ruby-tools-mode 1)
-						(diminish 'ruby-tools-mode)))
+						(diminish 'ruby-end-mode)))
 
 
 ;;Move backups to temp directory.  Who needs that crap, anyway?
@@ -366,22 +373,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
              (set-window-start w1 s2)
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
-
-(defun run_python_tests ()
-  "Run unittest via shell command."
-  (interactive)
-  (async-shell-command "python -m unittest discover"))
-
-(add-hook 'python-mode-hook
-          (lambda () (local-set-key (kbd "C-c t") 'run_python_tests)))
-;; (defun run-tests ()
-;;   "Run tests and display result in modeline"
-;;   (interactive)
-;;   (if (async-shell-command "make test")
-;;       "OK"
-;;     "error"))
-;;TODO: add a modeline for running tests.  Current bug: how to find project root and run there?
-;;(add-to-list 'mode-line-misc-info (eval (run-tests)))
 
 ;;Sticky-buffer-mode
 ;; https://gist.github.com/ShingoFukuyama/8797743
