@@ -25,15 +25,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(face-font-family-alternatives
-	 (quote
-		(("Monospace" "courier" "fixed")
-		 ("courier" "CMU Typewriter Text" "fixed")
-		 ("Sans Serif" "helv" "helvetica" "arial" "fixed")
-		 ("helv" "helvetica" "arial" "fixed"))))
+   (quote
+    (("Monospace" "courier" "fixed")
+     ("courier" "CMU Typewriter Text" "fixed")
+     ("Sans Serif" "helv" "helvetica" "arial" "fixed")
+     ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-	 (quote
-		(bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+   (quote
+    (ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -193,7 +193,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	:init
 	(setq pianobar-username "")
 	(setq pianobar-password "")
-	(setq pianobar-station "2")
+	(setq pianobar-station "18")
 	(autoload 'pianobar "pianobar" nil t)
 	:config
 	(global-set-key (kbd "C-x p p") 'pianobar-play-or-pause)
@@ -258,6 +258,10 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package feature-mode
   :mode
   ("\.feature$" . feature-mode))
+
+;; .ini files
+(use-package ini-mode
+	:diminish ini-mode)
 
   (setq inf-ruby-default-implementation "pry")
   ;;Custom elisp functions
