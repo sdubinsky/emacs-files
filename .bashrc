@@ -13,10 +13,10 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
 shopt -s histappend
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -62,6 +62,9 @@ else
 fi
 unset color_prompt force_color_prompt
 
+# history in every shell
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
@@ -91,6 +94,7 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+source ~/.git-completion.bash
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -109,21 +113,16 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 
-fortune | cowsay
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-source "$HOME"/merge_history.bash
+
 HISTSIZE=500000 HISTFILESIZE=5000000
 
+export PYTHONPATH=$PYTHONPATH:/Users/server/shalom/API:/Users/server/shalom/core
+
 ### Added by the Heroku Toolbelt
-PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
 
-FONTCONFIG_PATH=/Library/Fonts/
-source ~/.git-completions.sh
+export EDITOR="emacs"
 
-PATH="/usr/local/bin:$PATH"
-PATH="$PATH:/usr/local/sbin"
-EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" #This loads RVM into a shell session.
+fortune | cowsay
