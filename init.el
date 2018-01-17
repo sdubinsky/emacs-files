@@ -33,7 +33,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (haskell anaconda-mode diminish intero feature-mode auto-virtualenv markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -162,12 +162,12 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 	(add-to-list 'aggressive-indent-excluded-modes 'ess-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
 	:diminish aggressive-indent-mode)
 
 ;;Haskell
 (use-package haskell-mode
 	:init
-	(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 	(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 	(add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
 	(add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
