@@ -18,12 +18,23 @@
 ;;use cmd as meta as well
 (setq mac-command-key-is-meta t)
 
+;;semantic mode is from CEDET - more advanced code tools
+(semantic-mode 1)
+
+;;Spellchecking in latex mode
+(add-hook 'latex-mode-hook 'flyspell-mode)
+
 ;; disable splash screen
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-backends
+   (quote
+    (company-anaconda company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
+                      (company-dabbrev-code company-gtags company-etags company-keywords)
+                      company-oddmuse company-dabbrev)))
  '(face-font-family-alternatives
    (quote
     (("Monospace" "courier" "fixed")
@@ -33,7 +44,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (haskell anaconda-mode diminish intero feature-mode auto-virtualenv markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -41,12 +52,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(web-mode-symbol-face ((t (:foreground "blue")))))
-;;Include files
-(add-to-list 'load-path "~/.emacs-includes")
-
-
-
-
 
 ;;Tab size
 (setq-default tab-width 2)
@@ -58,7 +63,7 @@
                          ("melpa" . "https://melpa.milkbox.net/packages/")))
 (package-initialize)
 (unless package-archive-contents
- 	(package-refresh-contents))
+  (package-refresh-contents))
 
 (unless (package-installed-p 'use-package)
 	(package-install 'use-package))
@@ -263,10 +268,14 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package ini-mode
 	:diminish ini-mode)
 
-  (setq inf-ruby-default-implementation "pry")
-  ;;Custom elisp functions
-  ;;show the matching parenthesis
-  (show-paren-mode 1)
+(use-package yasnippet
+  :init
+  (yas-global-mode 1))
+
+(setq inf-ruby-default-implementation "pry")
+;;Custom elisp functions
+;;show the matching parenthesis
+(show-paren-mode 1)
 (setq show-paren-delay 0)
 (setq show-paren-style 'expression);;highlight whole expression
   ;;Show offscreen parens in minibuffer
@@ -302,6 +311,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	'(progn
 		 (define-key ruby-mode-map (kbd "#") 'senny-ruby-interpolate)))
 
+(add-to-list 'auto-mode-alist '("\\.god$" . ruby-mode))
 
 ;;(setq ruby-indent-tabs-mode t)
 (use-package ruby-end)
@@ -312,7 +322,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 					(lambda () 
 						(ruby-end-mode 1)
 						(diminish 'ruby-end-mode)))
-
 
 ;;Move backups to temp directory.  Who needs that crap, anyway?
 ;;Note that the temp directory is set to keep them for 30 days, 
