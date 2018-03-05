@@ -71,7 +71,7 @@
 (eval-when-compile
 	(require 'use-package))
 (setq use-package-always-ensure t)
-
+(setq use-package-always-defer t)
 
 ;;manually-set variables
 (global-set-key [insert] 'compile)
@@ -82,71 +82,75 @@
 
 (use-package diminish)
 (use-package magit
-	:init
-	(global-set-key (kbd "C-x g") 'magit-status))
+  :bind
+	("C-x g" . magit-status)
+  )
 
 (diminish 'autocomplete-mode)
 ;;flycheck
 (use-package flycheck
-  :init
-  (add-hook 'after-init-hook 'global-flycheck-mode))
-;; from https://github.com/Wilfred/flycheck-pyflakes/
-(add-to-list 'flycheck-disabled-checkers 'python-flake8)
-(add-to-list 'flycheck-disabled-checkers 'python-pylint)
-(flycheck-define-checker python-pyflakes
+  :config
+  (add-hook 'after-init-hook 'global-flycheck-mode)
+  ;; from https://github.com/Wilfred/flycheck-pyflakes/
+  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+  (flycheck-define-checker python-pyflakes
   "A Python syntax and style checker using the pyflakes utility.
 See URL `http://pypi.python.org/pypi/pyflakes'."
   :command ("pyflakes" source-inplace)
   :error-patterns
   ((error line-start (file-name) ":" line ":" (message) line-end))
   :modes python-mode anaconda-mode)
+  (add-to-list 'flycheck-checkers 'python-pyflakes))
 
-(add-to-list 'flycheck-checkers 'python-pyflakes)
+
 
 ;;Company-mode - autocompletion
 (use-package company
-	:init
-	(add-hook 'after-init-hook 'global-company-mode)
-  :config
-	(push 'company-robe company-backends)
+  :init
+  (add-hook 'after-init-hook 'global-company-mode)
+	:config
+  (push 'company-robe company-backends)
   (add-to-list 'company-backends 'company-anaconda)
 	:diminish company-mode)
 
 ;;org-mode settings
 (use-package org
-	:init
+	:config
 	(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 	(add-hook 'org-mode-hook 'visual-line-mode)
-	(global-set-key "\C-cl" 'org-store-link)
-	(global-set-key "\C-ca" 'org-agenda)
-	(global-font-lock-mode 1))
+  (global-font-lock-mode 1)
+  :bind
+	("C-c l" . org-store-link)
+	("C-c a" . org-agenda))
+	
 
 ;;visual line mode in text mode
 (add-hook 'text-mode-hook 'visual-line-mode)
 
 ;;lua-mode
 (use-package lua-mode
-	:init
+	:config
 	(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 	(add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
 
 ;;ido-mode
 (use-package ido
-	:init
+  :init
+  (ido-mode 1)
+	:config
 	(setq ido-enable-flex-matching t)
 	(setq ido-use-faces nil)
 	(setq ido-everywhere t)
-	(ido-mode 1)
 	(setq ido-auto-merge-work-directories-length -1)) ;; disable auto-merge
 ;;flx-mode for better string matching
 (use-package flx-ido
-	:init
+	:config
 	(flx-ido-mode 1))
-(add-hook 'latex-mode-hook 'flyspell-mode)
 
 ;;Markdown mode
 (use-package markdown-mode
-	:init
+	:config
 	(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 	(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 	(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -156,29 +160,24 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package yaml-mode)
 ;;guru-mode
 (use-package guru-mode
-	:init
+	:config
 	(guru-global-mode +1)
 	:diminish guru-mode)
 
 ;;Aggressive-indent-mode instead of electric-indent-mode.  Will indent blocks automatically.
 (use-package aggressive-indent
-	:init
+	:config
 	(global-aggressive-indent-mode 1)
 	(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 	(add-to-list 'aggressive-indent-excluded-modes 'ess-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
-  (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
 	:diminish aggressive-indent-mode)
 
 ;;Haskell
 (use-package haskell-mode
-	:init
-	(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-	(add-hook 'interactive-haskell-mode-hook 'ac-haskell-process-setup)
-	(add-hook 'haskell-interactive-mode-hook 'ac-haskell-process-setup)
-	(eval-after-load "auto-complete"
-		'(add-to-list 'ac-modes 'haskell-interactive-mode))
 	:config
+	(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+	(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 	;;indent/dedent region
 	(define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
 	(define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
@@ -186,21 +185,19 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;Python
 (use-package anaconda-mode
-  :init
+  :config
   (add-hook 'python-mode-hook 'anaconda-mode))
 (use-package auto-virtualenv
-	:init
+	:config
 	(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
 
 ;;pianobar
 (use-package pianobar
-	:init
-	(setq pianobar-username "")
+	:config
+	(setq pianobar-username "scrappydoo1891@gmail.com")
 	(setq pianobar-password "")
 	(setq pianobar-station "18")
-	(autoload 'pianobar "pianobar" nil t)
-	:config
 	(global-set-key (kbd "C-x p p") 'pianobar-play-or-pause)
 	(global-set-key (kbd "C-x p n") 'pianobar-next-song)
 	(global-set-key (kbd "C-x p s") 'pianobar-change-station)
@@ -209,32 +206,31 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;ess-mode for statistics
 (use-package ess
-	:init
+	:config
 	(require 'ess-site))
 ;;Anzu - show count of matches
 (use-package anzu
-	:init
-	(global-anzu-mode +1)
+	:config
+	(global-anzu-mode 1)
 	;;(global-set-key (kbd "M-%") 'anzu-query-replace)
 	;;(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
 	:diminish anzu-mode
 	)
 (use-package projectile
-	:init
+	:config
 	(projectile-global-mode)
   :diminish projectile-mode)
 (use-package bundler)
 ;;next set of packages are for rails
 (use-package projectile-rails
-	:init
-	(add-hook 'projectile-mode-hook 'projectile-rails-on)
 	:config
+	(add-hook 'projectile-mode-hook 'projectile-rails-on)
 	(define-key projectile-rails-command-map (kbd "A") (lambda() (interactive) (shell-command "bundle exec rake test")))
 	)
 (lambda() (shell-command "bundle exec rake test"))
 
 (use-package rspec-mode
-	:init
+	:config
 	(add-to-list 'auto-mode-alist '("\\.erb\\'" . rspec-mode))
 	:diminish rspec-mode)
 
@@ -252,11 +248,11 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package json-mode)
 
 (use-package rvm
-	:init
+	:config
 	(rvm-use-default)
 	:diminish rvm-mode)
 (use-package robe
-	:init
+	:config
 	(add-hook 'ruby-mode-hook 'robe-mode)
 	:diminish robe-mode)
 
