@@ -44,7 +44,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -52,7 +52,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(web-mode-symbol-face ((t (:foreground "blue")))))
-
+;;
+(use-package hc-zenburn-theme
+  :init
+  (load-theme 'hc-zenburn t))
 ;;Tab size
 (setq-default tab-width 2)
 (require 'package)
@@ -79,8 +82,11 @@
 (global-set-key "\C-l" 'goto-line)
 ;;go one fram backward
 (global-set-key (kbd "C-x x") '(lambda () "frame-back one" (interactive) (other-window -1)))
-
+(setq nxml-sexp-element-flag t)
 (use-package diminish)
+
+;;Theme
+
 (use-package magit
   :bind
 	("C-x g" . magit-status)
@@ -90,7 +96,7 @@
 ;;flycheck
 (use-package flycheck
   :config
-  (add-hook 'after-init-hook 'global-flycheck-mode)
+  (global-flycheck-mode t)
   ;; from https://github.com/Wilfred/flycheck-pyflakes/
   (add-to-list 'flycheck-disabled-checkers 'python-flake8)
   (add-to-list 'flycheck-disabled-checkers 'python-pylint)
@@ -112,6 +118,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	:config
   (push 'company-robe company-backends)
   (add-to-list 'company-backends 'company-anaconda)
+  (setq company-dabbrev-downcase 0)
+  (setq company-idle-delay 0)
 	:diminish company-mode)
 
 ;;org-mode settings
@@ -160,7 +168,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package yaml-mode)
 ;;guru-mode
 (use-package guru-mode
-	:config
+	:init
 	(guru-global-mode +1)
 	:diminish guru-mode)
 
@@ -268,6 +276,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :init
   (yas-global-mode 1))
 
+
+
 (setq inf-ruby-default-implementation "pry")
 ;;Custom elisp functions
 ;;show the matching parenthesis
@@ -287,7 +297,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 														 (blink-matching-open))))
     (when matching-text (message matching-text))))
 
-
+;;http://wikemacs.org/wiki/Shell#Shell_completion_with_a_nice_menu_.C3.A0_la_zsh
+(add-hook 'shell-mode-hook #'company-mode)
 
 
 ;;Ruby
@@ -312,6 +323,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 ;;(setq ruby-indent-tabs-mode t)
 (use-package ruby-end)
 ;;Electric pair mode
+;;https://github.com/daedreth/UncleDavesEmacs
+(add-to-list 'electric-pair-pairs '(?\` . ?\`))
 (electric-pair-mode t)
 
 (add-hook 'ruby-mode-hook 
