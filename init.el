@@ -52,10 +52,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(web-mode-symbol-face ((t (:foreground "blue")))))
-;;
-(use-package hc-zenburn-theme
-  :init
-  (load-theme 'hc-zenburn t))
 ;;Tab size
 (setq-default tab-width 2)
 (require 'package)
@@ -75,6 +71,10 @@
 	(require 'use-package))
 (setq use-package-always-ensure t)
 (setq use-package-always-defer t)
+;;dark high-contrast theme
+(use-package hc-zenburn-theme
+  :init
+  (load-theme 'hc-zenburn t))
 
 ;;manually-set variables
 (global-set-key [insert] 'compile)
