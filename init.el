@@ -226,7 +226,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	)
 (use-package projectile
 	:config
-	(projectile-global-mode)
+	(projectile-mode)
   :diminish projectile-mode)
 (use-package bundler)
 ;;next set of packages are for rails
@@ -324,7 +324,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package ruby-end)
 ;;Electric pair mode
 ;;https://github.com/daedreth/UncleDavesEmacs
-(add-to-list 'electric-pair-pairs '(?\` . ?\`))
+(setq electric-pair-pairs '((?\` . ?\`)))
 (electric-pair-mode t)
 
 (add-hook 'ruby-mode-hook 
