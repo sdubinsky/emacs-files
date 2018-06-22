@@ -195,7 +195,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
 	(define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
 	(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
-
+(use-package intero
+  :hook (haskell-mode . intero-global-mode))
 ;;Python
 (use-package anaconda-mode
   :config
