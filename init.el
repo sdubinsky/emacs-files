@@ -45,7 +45,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -126,6 +126,10 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 ;;realgud better debugging
 (use-package realgud
   :defer 0)
+(use-package realgud-pry
+  :after realgud)
+(use-package realgud-byebug
+  :after realgud)
 
 ;;org-mode settings
 (use-package org
@@ -133,6 +137,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 	(add-hook 'org-mode-hook 'visual-line-mode)
   (global-font-lock-mode 1)
+  (setq org-startup-indented 1)
+  :diminish org-indent-mode
   :bind
 	("C-c l" . org-store-link)
 	("C-c a" . org-agenda))
@@ -231,6 +237,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	:diminish anzu-mode
 	)
 (use-package projectile
+  :defer 0
 	:config
 	(projectile-mode)
   :diminish projectile-mode)
@@ -244,11 +251,10 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (lambda() (shell-command "bundle exec rake test"))
 
 (use-package rspec-mode
-	:config
-	(add-to-list 'auto-mode-alist '("\\.erb\\'" . rspec-mode))
 	:diminish rspec-mode)
 
 (use-package web-mode
+  :defer 0
 	:mode
 	("\\.phtml\\'" . web-mode)
 	("\\.tpl\\.php\\'" . web-mode)
@@ -337,6 +343,9 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 					(lambda () 
 						(ruby-end-mode 1)
 						(diminish 'ruby-end-mode)))
+
+(use-package arduino-mode
+  :mode "\\.ino$")
 
 ;;Move backups to temp directory.  Who needs that crap, anyway?
 ;;Note that the temp directory is set to keep them for 30 days, 
