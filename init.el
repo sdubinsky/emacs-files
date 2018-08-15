@@ -45,7 +45,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails projectile anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -59,8 +59,7 @@
 
 ;;Load autoinstalled packages(require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.milkbox.net/packages/")))
+                         ("melpa" . "https://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -202,7 +201,13 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
 	(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
 (use-package intero
+  :diminish intero-mode
   :hook (haskell-mode . intero-global-mode))
+(use-package ghc
+  :config
+  :hook (haskell-mode . ghc-comp-init))
+(use-package company-ghc
+  :after ghc)
 ;;Python
 (use-package anaconda-mode
   :config
@@ -238,7 +243,9 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	)
 (use-package projectile
   :defer 0
-	:config
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
 	(projectile-mode)
   :diminish projectile-mode)
 (use-package bundler)
@@ -286,9 +293,15 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 (use-package yasnippet
   :init
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  :diminish yas-mode)
 
-
+(use-package csharp-mode)
+(use-package omnisharp
+  :after company
+  :config
+  (add-hook 'csharp-mode-hook 'omnisharp-mode)
+  (add-to-list 'company-backends 'company-omnisharp))
 
 (setq inf-ruby-default-implementation "pry")
 ;;Custom elisp functions
