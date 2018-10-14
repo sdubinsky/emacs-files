@@ -45,7 +45,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -100,6 +100,7 @@
   ;; from https://github.com/Wilfred/flycheck-pyflakes/
   (add-to-list 'flycheck-disabled-checkers 'python-flake8)
   (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+  (add-to-list 'flycheck-disabled-checkers 'emacs-list-checkdoc)
   (flycheck-define-checker python-pyflakes
   "A Python syntax and style checker using the pyflakes utility.
 See URL `http://pypi.python.org/pypi/pyflakes'."
@@ -295,6 +296,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :init
   (yas-global-mode 1)
   :diminish yas-mode)
+
+(use-package yasnippet-snippets)
 
 (use-package csharp-mode)
 (use-package omnisharp
