@@ -117,17 +117,10 @@ fi
 HISTSIZE=500000 HISTFILESIZE=5000000
 
 export PYTHONPATH=$PYTHONPATH:/Users/server/shalom/API:/Users/server/shalom/core
-export PATH=$PATH:/home/reader/.local/bin
-
+export PATH="/usr/local/bin:$PATH:~/.local/bin"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -c -a emacs"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source /usr/local/share/chruby/chruby.sh
-chruby ruby-2.4
+export EDITOR="emacs"
 
 fortune | cowsay
