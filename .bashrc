@@ -112,11 +112,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 
 
 HISTSIZE=500000 HISTFILESIZE=5000000
 
-export PYTHONPATH=$PYTHONPATH:/Users/server/shalom/API:/Users/server/shalom/core
 export PATH="/usr/local/bin:$PATH:~/.local/bin"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
