@@ -1,4 +1,4 @@
-sudo apt install curl screen ghc emacs vlc git i3 cowsay fortune-mod postgresql postgresql-server-dev-all cowsay fortune-mod adb feh
+sudo apt install curl screen ghc emacs vlc git i3 cowsay fortune-mod postgresql postgresql-server-dev-all cowsay fortune-mod adb feh xserver-xorg-input-synaptics redshift exiftool
 
 git config --global user.name "Shalom Dubinsky"
 git config --global user.email "smdubinsky@gmail.com"
@@ -6,6 +6,12 @@ git config --global user.email "smdubinsky@gmail.com"
 git clone https://github.com/sdubinsky/emacs-files.git
 cp emacs-files/.bash* emacs-files/.profile ~
 cp emacs-files/init.el ~/.emacs.d
+cp emacs-files/emacs.service ~/.config/systemd/user/emacs.service
+
+systemctl --user enable emacs
+systemctl --user start emacs
+systemctl --user enable redshift
+systemctl --user start redshift
 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #sudo dpkg -i google-chrome-stable_current_amd64.deb
