@@ -3,7 +3,7 @@ sudo apt install curl screen ghc emacs vlc git i3 cowsay fortune-mod postgresql 
 git config --global user.name "Shalom Dubinsky"
 git config --global user.email "smdubinsky@gmail.com"
 
-git clone https://github.com/sdubinsky/emacs-files.git
+git clone git@github.com:sdubinsky/emacs-files.git
 cp emacs-files/.bash* emacs-files/.profile ~
 cp emacs-files/init.el ~/.emacs.d
 cp emacs-files/emacs.service ~/.config/systemd/user/emacs.service
