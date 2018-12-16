@@ -165,8 +165,8 @@ workspace_layout tabbed
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
-bindsym XF86AudioMute exec amixer sset Master toggle
-bindsym XF86Switch_VT_1 exec amixer sset Master toggle
+bindsym XF86AudioMute exec amixer sset Master toggle; exec amixer sset Headphone unmute; exec amixer sset Speaker unmute
+bindsym XF86Switch_VT_1 exec amixer sset Master toggle; exec amixer sset Headphone unmute; exec amixer sset Speaker unmute
 
 
 # Sreen brightness controls
@@ -174,11 +174,16 @@ bindsym XF86Switch_VT_1 exec amixer sset Master toggle
 bindsym XF86Switch_VT_11 exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86Switch_VT_12 exec xbacklight -dec 20 # decrease screen brightness
 
+exec synclient VertScrollDelta=-70
+exec synclient TapButton3=2
+
+exec syndaemon -i 0.5 -t -K -R -d
 
 #emacs client
 bindsym $mod+m exec emacsclient -c
 #set wallpaper
-exec --no-startup-id feh --bg-scale /home/reader/Pictures/huskyonlake.jpg
+exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
 
 #wifi applet
 exec --no-startup-id nm-applet
+

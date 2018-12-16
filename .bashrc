@@ -114,7 +114,7 @@ fi
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-
+chruby 2.5.3
 
 HISTSIZE=500000 HISTFILESIZE=5000000
 
@@ -123,5 +123,7 @@ export PATH="/usr/local/bin:$PATH:~/.local/bin"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 export EDITOR="emacs"
+
+
 
 fortune | cowsay
