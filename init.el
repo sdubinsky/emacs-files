@@ -45,7 +45,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (company-nand2tetris nand2tetris nand2tetris-assembler ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -263,6 +263,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 (use-package web-mode
   :defer 0
+  :config
+  (web-mode-enable-auto-pairing t)
 	:mode
 	("\\.phtml\\'" . web-mode)
 	("\\.tpl\\.php\\'" . web-mode)
@@ -445,3 +447,12 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package go-mode
   :hook (before-save . gofmt-before-save))
 (put 'downcase-region 'disabled nil)
+
+(use-package nand2tetris
+  :config
+  (setq nand2tetris-core-base-dir "~/code/nand2tetris")
+  (add-hook 'nand2tetris-mode 'company-mode)
+  (add-hook 'nand2tetris-mode 'company-nand2tetris)
+  :mode
+  ("\.*\\.hdl" . 'nand2tetris-mode))
+(use-package nand2tetris-assembler)
