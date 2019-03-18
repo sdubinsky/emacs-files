@@ -459,3 +459,10 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :mode
   ("\.*\\.hdl" . 'nand2tetris-mode))
 (use-package nand2tetris-assembler)
+
+(use-package stripe-buffer
+  :defer 0
+  :config
+  (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
+  (add-hook 'org-mode-hook 'turn-on-stripe-table-mode))
+
