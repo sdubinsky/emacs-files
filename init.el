@@ -50,15 +50,25 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
+ '(ledger-clear-whole-transactions t)
  '(ledger-reports
    (quote
-    (("reg" "ledger [[ledger-mode-flags]] -f %(ledger-file) reg")
+    (("reg" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat reg")
+     ("balance" "ledger -f ledger-2019.dat")
+     ("currentbalance" "ledger ")
      ("bal" "%(binary) -f %(ledger-file) bal")
      ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
+ '(org-capture-templates
+   (quote
+    (("l" "insert item into ledger" plain
+      (file "~/Documents/finances/ledger/ledger-2019.dat")
+      "%(org-read-date) %^{Payee}
+	%^{Account}  %^{Currency|NIS }%^{Amount}
+	%^{Payer|Expenses:BHP Checking}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -161,8 +171,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :diminish org-indent-mode
   :bind
 	("C-c l" . org-store-link)
-	("C-c a" . org-agenda))
-	
+	("C-c a" . org-agenda)
+  ("C-c c" . org-capture))
 
 ;;visual line mode in text mode
 (add-hook 'text-mode-hook 'visual-line-mode)
@@ -497,9 +507,9 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (global-set-key (kbd "C-c h") 'hs-hide-block)
   (global-set-key (kbd "C-c s") 'hs-show-block))
 
+;;ledger mode for accounting.
+;;Accounts are stored in Documents/finances/ledger/ledger-xxxx.dat
 (use-package ledger-mode
   :mode ("\\.dat\\'"
          "\\.ledger\\'")
   :custom (ledger-clear-whole-transactions t))
-
-
