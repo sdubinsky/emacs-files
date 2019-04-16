@@ -295,10 +295,11 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 (use-package json-mode)
 
-(use-package rvm
-	:config
-	(rvm-use-default)
-	:diminish rvm-mode)
+;;ruby stuff
+(use-package chruby
+  :hook ruby-mode
+  :config
+  (chruby "2.5.3"))
 (use-package robe
 	:config
 	(add-hook 'ruby-mode-hook 'robe-mode)
@@ -379,6 +380,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 					(lambda () 
 						(ruby-end-mode 1)
 						(diminish 'ruby-end-mode)))
+(add-hook 'ruby-mode-hook 'hs-minor-mode)
+
 
 (use-package arduino-mode
   :mode "\\.ino$")
@@ -481,7 +484,22 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
   (add-hook 'org-mode-hook 'turn-on-stripe-table-mode))
 
+;;https://superuser.com/questions/576447/enable-hideshow-for-more-modes-e-g-ruby
+(use-package hideshow
+  :diminish hs-minor-mode
+  :config
+  (add-to-list 'hs-special-modes-alist
+               `(ruby-mode
+                 ,(rx (or "def" "class" "module" "do" "{" "["))
+                 ,(rx (or "}" "]" "end"))
+                 ,(rx (or "#" "=begin"))
+                 ruby-forward-sexp nil))
+  (global-set-key (kbd "C-c h") 'hs-hide-block)
+  (global-set-key (kbd "C-c s") 'hs-show-block))
+
 (use-package ledger-mode
   :mode ("\\.dat\\'"
          "\\.ledger\\'")
   :custom (ledger-clear-whole-transactions t))
+
+
