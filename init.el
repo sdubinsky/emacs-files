@@ -28,6 +28,10 @@
 ;;speed up tramp
 (setq tramp-default-method "ssh")
 
+
+;;set font to Hack, if it exists
+(set-frame-font "Hack-12" nil t)
+
 ;; disable splash screen
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
