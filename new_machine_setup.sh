@@ -1,4 +1,4 @@
-sudo apt install curl screen ghc emacs vlc git i3 cowsay fortune-mod postgresql postgresql-server-dev-all cowsay fortune-mod adb feh xserver-xorg-input-synaptics redshift exiftool
+sudo apt install curl apcalc screen ghc emacs vlc git i3 cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools
 
 git config --global user.name "Shalom Dubinsky"
 git config --global user.email "smdubinsky@gmail.com"
