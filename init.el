@@ -50,9 +50,15 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
+ '(ledger-reports
+   (quote
+    (("reg" "ledger [[ledger-mode-flags]] -f %(ledger-file) reg")
+     ("bal" "%(binary) -f %(ledger-file) bal")
+     ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
+     ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(package-selected-packages
    (quote
-    (ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec rvm robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -95,14 +101,18 @@
 (setq nxml-sexp-element-flag t)
 (use-package diminish)
 
-;;Theme
-
 (use-package magit
   :bind
 	("C-x g" . magit-status)
   )
 
 (diminish 'autocomplete-mode)
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+  :defer 0)
+
 ;;flycheck
 (use-package flycheck
   :config
@@ -273,8 +283,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 (use-package web-mode
   :defer 0
-  :config
-  (web-mode-enable-auto-pairing t)
 	:mode
 	("\\.phtml\\'" . web-mode)
 	("\\.tpl\\.php\\'" . web-mode)
@@ -473,3 +481,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
   (add-hook 'org-mode-hook 'turn-on-stripe-table-mode))
 
+(use-package ledger-mode
+  :mode ("\\.dat\\'"
+         "\\.ledger\\'")
+  :custom (ledger-clear-whole-transactions t))
