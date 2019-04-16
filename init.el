@@ -25,6 +25,9 @@
 ;;Spellchecking in latex mode
 (add-hook 'latex-mode-hook 'flyspell-mode)
 
+;;speed up tramp
+(setq tramp-default-method "ssh")
+
 ;; disable splash screen
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
