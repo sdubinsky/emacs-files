@@ -61,11 +61,17 @@
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(org-capture-templates
    (quote
-    (("l" "insert item into ledger" plain
+    (("t" "todo list" entry
+      (file "~/org/todo.org")
+      "* TODO (%(org-read-date)): %^{task}" :immediate-finish t)
+     ("n" "Take a note" plain
+      (file "~/org/notes.org")
+      "%(org-read-date): %^{note}" :immediate-finish t)
+     ("l" "insert item into ledger" plain
       (file "~/Documents/finances/ledger/ledger-2019.dat")
       "%(org-read-date) %^{Payee}
 	%^{Account}  %^{Currency|NIS }%^{Amount}
-	%^{Payer|Expenses:BHP Checking}" :empty-lines 1))))
+	%^{Payer|Assets:BHP Checking}" :empty-lines 1))))
  '(package-selected-packages
    (quote
     (pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
