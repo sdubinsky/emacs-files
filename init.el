@@ -399,9 +399,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (add-hook 'ruby-mode-hook 'hs-minor-mode)
 
 
-(use-package arduino-mode
-  :mode "\\.ino$")
-
 ;;Move backups to temp directory.  Who needs that crap, anyway?
 ;;Note that the temp directory is set to keep them for 30 days, 
 ;;so it's not entirely stupid.
