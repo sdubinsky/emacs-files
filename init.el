@@ -519,4 +519,4 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :custom (ledger-clear-whole-transactions t))
 
 (use-package restclient
-  :mode "\\.http\\'")
+  :mode ("\\.http\\'" . restclient-mode))
