@@ -30,7 +30,8 @@ fi
 git config --global user.name "Shalom Dubinsky"
 git config --global user.email "smdubinsky@gmail.com"
 
-git clone git@github.com:sdubinsky/emacs-files.git
+cd ~
+git clone https://github.com/sdubinsky/emacs-files.git
 ln -s ~/emacs-files/.bashrc ~/.bashrc
 ln -s ~/emacs-files/.bash_profile ~/.bash_profile
 ln -s ~/emacs-files/.profile ~/.profile
