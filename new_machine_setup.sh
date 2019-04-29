@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$(expr substr $(uname -s)) 1 5" == "Linux" ]; then
-    sudo apt install curl apcalc screen ghc emacs vlc git i3 cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2
+    sudo apt install curl apcalc screen ghc emacs vlc git i3-wm cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2
     systemctl --user enable emacs
     systemctl --user start emacs
     systemctl --user enable redshift
