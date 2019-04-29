@@ -158,6 +158,9 @@ bar {
 #Default workspace layout type
 workspace_layout tabbed
 
+#Set monitor to the left
+exec --no-startup-id xrandr --output HDMI-1 --left-of eDP-1 --auto
+
 # Set up fn+Fn modifier keys(e.g. Fn+F3)
 # from: https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 # NB:For now, these respond to the function keys without modifiers.
@@ -176,6 +179,7 @@ bindsym XF86Switch_VT_12 exec xbacklight -dec 20 # decrease screen brightness
 
 exec synclient VertScrollDelta=-70
 exec synclient TapButton3=2
+exec xinput set-prop $(xinput list --id-only 'pointer:Logitech USB Receiver') 277 1
 
 exec syndaemon -i 0.5 -t -K -R -d
 
