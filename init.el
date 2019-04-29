@@ -507,8 +507,9 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
                  ,(rx (or "}" "]" "end"))
                  ,(rx (or "#" "=begin"))
                  ruby-forward-sexp nil))
-  (global-set-key (kbd "C-c h") 'hs-hide-block)
-  (global-set-key (kbd "C-c s") 'hs-show-block))
+  (add-hook 'prog-mode-hook
+            (lambda () hs-minor-mode 1))
+  (global-set-key (kbd "C-c h") 'hs-toggle-hiding))
 
 ;;ledger mode for accounting.
 ;;Accounts are stored in Documents/finances/ledger/ledger-xxxx.dat
@@ -516,3 +517,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :mode ("\\.dat\\'"
          "\\.ledger\\'")
   :custom (ledger-clear-whole-transactions t))
+
+(use-package restclient
+  :mode "\\.http\\'")
