@@ -12,15 +12,16 @@
 (setq mac-command-modifier 'meta)
 (setq initial-scratch-message "")
 
+;;I don't really want to accidentally suspend emacs a lot
+;;If this comes up a lot in terminal, redefine the key instead
+;;from https://www.gnu.org/software/emacs/manual/html_node/emacs/Disabling.html#Disabling
+(global-set-key (kbd "C-z") nil)
 ;;conservative scrolling
 (setq scroll-step            1
       scroll-conservatively  10000)
 
 ;;use cmd as meta as well
 (setq mac-command-key-is-meta t)
-
-;;semantic mode is from CEDET - more advanced code tools
-(semantic-mode 1)
 
 ;;Spellchecking in latex mode
 (add-hook 'latex-mode-hook 'flyspell-mode)
@@ -50,7 +51,7 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t)
+ '(ledger-clear-whole-transactions t t)
  '(ledger-reports
    (quote
     (("reg" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat reg")
@@ -74,7 +75,8 @@
 	%^{Payer|Assets:BHP Checking}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))))
+    (dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+ '(pyvenv-mode t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -106,7 +108,7 @@
   (load-theme 'hc-zenburn t))
 
 ;;manually-set variables
-(global-set-key [insert] 'compile)
+(global-set-key [insert] 'realgud:pdb)
 ;;goto line
 (global-set-key "\C-l" 'goto-line)
 ;;go one fram backward
@@ -143,7 +145,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :command ("pyflakes" source-inplace)
   :error-patterns
   ((error line-start (file-name) ":" line ":" (message) line-end))
-  :modes python-mode anaconda-mode)
+  :modes python-mode)
   (add-to-list 'flycheck-checkers 'python-pyflakes))
 
 
@@ -155,13 +157,15 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	:config
   (push 'company-robe company-backends)
   (add-to-list 'company-backends 'company-anaconda)
-  (setq company-dabbrev-downcase 0)
+  (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
 	:diminish company-mode)
 
 ;;realgud better debugging
 (use-package realgud
-  :defer 0)
+  :defer 0
+  :config
+  (setq realgud:pdb-command-name "python"))
 (use-package realgud-pry
   :after realgud)
 (use-package realgud-byebug
@@ -246,14 +250,12 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package company-ghc
   :after ghc)
 ;;Python
-(use-package anaconda-mode
-  :config
-  (add-hook 'python-mode-hook 'anaconda-mode))
 (use-package auto-virtualenv
 	:config
 	(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
-
+(use-package pyvenv
+  :hook (python-mode . pyvenv-mode))
 ;;pianobar
 (use-package pianobar
 	:config
@@ -482,15 +484,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :hook (before-save . gofmt-before-save))
 (put 'downcase-region 'disabled nil)
 
-(use-package nand2tetris
-  :config
-  (setq nand2tetris-core-base-dir "~/code/nand2tetris")
-  (add-hook 'nand2tetris-mode 'company-mode)
-  (add-hook 'nand2tetris-mode 'company-nand2tetris)
-  :mode
-  ("\.*\\.hdl" . 'nand2tetris-mode))
-(use-package nand2tetris-assembler)
-
 (use-package stripe-buffer
   :defer 0
   :config
@@ -500,6 +493,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 ;;https://superuser.com/questions/576447/enable-hideshow-for-more-modes-e-g-ruby
 (use-package hideshow
   :diminish hs-minor-mode
+  :hook (prog-mode . hs-minor-mode)
   :config
   (add-to-list 'hs-special-modes-alist
                `(ruby-mode
@@ -507,8 +501,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
                  ,(rx (or "}" "]" "end"))
                  ,(rx (or "#" "=begin"))
                  ruby-forward-sexp nil))
-  (add-hook 'prog-mode-hook
-            (lambda () hs-minor-mode 1))
   (global-set-key (kbd "C-c h") 'hs-toggle-hiding))
 
 ;;ledger mode for accounting.
@@ -520,3 +512,24 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 (use-package restclient
   :mode ("\\.http\\'" . restclient-mode))
+
+(use-package csv
+  :mode ("\\.csv\\'" . csv-mode))
+
+;;semantic mode is from CEDET - more advanced code tools
+(use-package semantic
+  :defer 0
+  :bind
+  (("C-c ." . semantic-complete-jump))
+  :config
+  (setq semantic-default-submodes '(global-semantic-idle-scheduler-mode
+                                    global-semanticdb-minor-mode
+                                    global-semantic-highlight-func-mode
+                                    global-semantic-idle-local-symbol-highlight-mode
+                                    ))
+  (add-hook 'prog-mode-hook #'semantic-mode))
+
+
+;;from http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/
+(use-package dired-narrow
+  :bind(:map dired-mode-map ("/" . dired-narrow-regexp)))
