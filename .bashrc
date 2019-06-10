@@ -114,7 +114,7 @@ fi
 
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-chruby 2.5.3
+chruby ruby
 
 HISTSIZE=500000 HISTFILESIZE=5000000
 

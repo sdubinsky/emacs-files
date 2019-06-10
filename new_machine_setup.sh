@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$(expr substr $(uname -s)) 1 5" == "Linux" ]; then
-    sudo apt install curl apcalc screen ghc emacs vlc git i3 cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2
+    sudo apt install curl apcalc screen ghc emacs vlc git i3-wm cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2
     systemctl --user enable emacs
     systemctl --user start emacs
     systemctl --user enable redshift
@@ -30,7 +30,8 @@ fi
 git config --global user.name "Shalom Dubinsky"
 git config --global user.email "smdubinsky@gmail.com"
 
-git clone git@github.com:sdubinsky/emacs-files.git
+cd ~
+git clone https://github.com/sdubinsky/emacs-files.git
 ln -s ~/emacs-files/.bashrc ~/.bashrc
 ln -s ~/emacs-files/.bash_profile ~/.bash_profile
 ln -s ~/emacs-files/.profile ~/.profile
