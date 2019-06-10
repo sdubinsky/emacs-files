@@ -64,7 +64,7 @@
    (quote
     (("t" "todo list" entry
       (file "~/org/todo.org")
-      "* TODO (%(org-read-date)): %^{task}" :immediate-finish t)
+      "* TODO (%(org-read-date)): %^{task}" :prepend t :immediate-finish t)
      ("n" "Take a note" plain
       (file "~/org/notes.org")
       "%(org-read-date): %^{note}" :immediate-finish t)
@@ -75,7 +75,7 @@
 	%^{Payer|Assets:BHP Checking}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+    (forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
  '(pyvenv-mode t))
 
 (custom-set-faces
@@ -122,6 +122,9 @@
 (use-package magit
   :bind
 	("C-x g" . magit-status)
+  )
+(use-package forge
+  :after magit
   )
 
 (diminish 'autocomplete-mode)
@@ -217,11 +220,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;Yaml mode
 (use-package yaml-mode)
-;;guru-mode
-(use-package guru-mode
-	:init
-	(guru-global-mode +1)
-	:diminish guru-mode)
 
 ;;Aggressive-indent-mode instead of electric-indent-mode.  Will indent blocks automatically.
 (use-package aggressive-indent
@@ -533,3 +531,5 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 ;;from http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/
 (use-package dired-narrow
   :bind(:map dired-mode-map ("/" . dired-narrow-regexp)))
+
+(use-package dockerfile-mode)
