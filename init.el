@@ -78,7 +78,7 @@
 	%^{Payer|Assets:BHP Checking}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+    (ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
  '(pyvenv-mode t))
 
 (custom-set-faces
@@ -162,7 +162,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (add-hook 'after-init-hook 'global-company-mode)
 	:config
   (push 'company-robe company-backends)
-  (add-to-list 'company-backends 'company-anaconda)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
 	:diminish company-mode)
@@ -288,6 +287,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :config
 	(projectile-mode)
   :diminish projectile-mode)
+(use-package ripgrep)
+
 (use-package bundler)
 ;;next set of packages are for rails
 (use-package projectile-rails
