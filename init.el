@@ -11,6 +11,9 @@
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 (setq initial-scratch-message "")
+;;natural scrolling
+(setq mwheel-scroll-up-function 'scroll-down)
+(setq mwheel-scroll-down-function 'scroll-up)
 
 ;;I don't really want to accidentally suspend emacs a lot
 ;;If this comes up a lot in terminal, redefine the key instead
