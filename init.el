@@ -57,10 +57,11 @@
  '(ledger-clear-whole-transactions t t)
  '(ledger-reports
    (quote
-    (("reg" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat reg")
+    (("reg" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat reg not Equity")
+     ("balr" "ledger --real")
+     ("bal" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat bal not Equity")
      ("balance" "ledger -f ledger-2019.dat")
      ("currentbalance" "ledger ")
-     ("bal" "%(binary) -f %(ledger-file) bal")
      ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(org-capture-templates
@@ -74,8 +75,8 @@
      ("l" "insert item into ledger" plain
       (file "~/Documents/finances/ledger/ledger-2019.dat")
       "%(org-read-date) %^{Payee}
-	%^{Account}  %^{Currency|NIS }%^{Amount}
-	%^{Payer|Assets:BHP Checking}" :empty-lines 1))))
+	%^{Account|Expenses:Eating Out|Expenses:Groceries}  %^{Currency|NIS }%^{Amount}
+	%^{Payer|Assets:BHP Checking|Assets:Cash}" :empty-lines 1))))
  '(package-selected-packages
    (quote
     (undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
