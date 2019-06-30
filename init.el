@@ -78,7 +78,7 @@
 	%^{Payer|Assets:BHP Checking}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+    (undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
  '(pyvenv-mode t))
 
 (custom-set-faces
@@ -139,6 +139,7 @@
 
 ;;flycheck
 (use-package flycheck
+  :defer 0
   :config
   (global-flycheck-mode t)
   ;; from https://github.com/Wilfred/flycheck-pyflakes/
@@ -165,6 +166,12 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
 	:diminish company-mode)
+
+;;undo-tree-mode better undoing and redoing
+(use-package undo-tree
+  :bind (("C-c z" . undo-tree-visualize))
+  :config
+  (global-undo-tree-mode t))
 
 ;;realgud better debugging
 (use-package realgud
@@ -198,6 +205,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 	(add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 ;;ido-mode
 (use-package ido
   :init
