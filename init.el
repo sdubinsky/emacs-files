@@ -34,7 +34,7 @@
 
 
 ;;set font to Hack, if it exists
-(set-frame-font "Hack-12" nil t)
+(add-to-list 'default-frame-alist '(font . "Hack-12"))
 
 ;; disable splash screen
 (custom-set-variables
