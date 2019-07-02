@@ -158,9 +158,6 @@ bar {
 #Default workspace layout type
 workspace_layout tabbed
 
-#Set monitor to the left
-exec --no-startup-id xrandr --output HDMI-1 --left-of eDP-1 --auto
-
 # Set up fn+Fn modifier keys(e.g. Fn+F3)
 # from: https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 # NB:For now, these respond to the function keys without modifiers.
@@ -191,3 +188,7 @@ exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
 #wifi applet
 exec --no-startup-id nm-applet
 
+#detect monitors
+exec_always xrandr --auto
+
+exec_always xrandr --output HDMI-1 --left-of eDP-1 --output DP-1 --auto --left-of HDMI-1
