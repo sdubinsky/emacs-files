@@ -54,7 +54,7 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t t)
+ '(ledger-clear-whole-transactions t)
  '(ledger-reports
    (quote
     (("reg" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat reg not Equity")
