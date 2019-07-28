@@ -57,11 +57,9 @@
  '(ledger-clear-whole-transactions t)
  '(ledger-reports
    (quote
-    (("reg" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat reg not Equity")
-     ("balr" "ledger --real")
-     ("bal" "ledger [[ledger-mode-flags]] -f /Users/deus-mac/Documents/finances/ledger/ledger-2019.dat bal not Equity")
-     ("balance" "ledger -f ledger-2019.dat")
-     ("currentbalance" "ledger ")
+    (("bal" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) bal not Equity -E --current")
+     ("reg" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) reg not Equity -S -date --current")
+     ("balr" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) bal not Equity -E --real --current")
      ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(org-capture-templates
