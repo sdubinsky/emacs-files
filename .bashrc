@@ -124,6 +124,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 export EDITOR="emacs"
 
-
+export HOMEBREW_NO_INSTALL_CLEANUP=1
 
 fortune | cowsay
