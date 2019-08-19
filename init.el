@@ -54,7 +54,7 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t t)
+ '(ledger-clear-whole-transactions t)
  '(ledger-reports
    (quote
     (("bal" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) bal not Equity -E --current")
@@ -240,6 +240,13 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-to-list 'aggressive-indent-excluded-modes 'ess-mode)
   (add-to-list 'aggressive-indent-excluded-modes 'python-mode)
 	:diminish aggressive-indent-mode)
+
+;;god mode - no more holding down the control key.
+(use-package god-mode
+  :bind ("C-c g" . god-local-mode)
+  (:map god-local-mode-map
+        ("z" . repeat)
+        ("i" . god-local-mode)))
 
 ;;Haskell
 (use-package haskell-mode
