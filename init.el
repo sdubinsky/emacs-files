@@ -67,9 +67,9 @@
     (("t" "todo list" entry
       (file "~/org/todo.org")
       "* TODO (%(org-read-date)): %^{task}" :prepend t :immediate-finish t)
-     ("n" "Take a note" plain
+     ("n" "Take a note" item
       (file "~/org/notes.org")
-      "%(org-read-date): %^{note}" :immediate-finish t)
+      "%(org-read-date): %^{note}" :prepend t :immediate-finish t)
      ("l" "insert item into ledger" plain
       (file "~/Documents/finances/ledger/ledger-2019.dat")
       "%(org-read-date) %^{Payee}
@@ -129,7 +129,6 @@
   :after magit
   )
 
-(diminish 'autocomplete-mode)
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
@@ -164,6 +163,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (push 'company-robe company-backends)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 5)
+  (setq company-require-match nil)
 	:diminish company-mode)
 
 ;;undo-tree-mode better undoing and redoing
@@ -300,6 +301,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :defer 0
   :bind-keymap
   ("C-c p" . projectile-command-map)
+  :bind
+  ("M-." . projectile-find-tag)
   :config
   (projectile-register-project-type 'sinatra '("Gemfile")
                                     :run "bundle exec ruby config.ru"
@@ -559,3 +562,4 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :bind(:map dired-mode-map ("/" . dired-narrow-regexp)))
 
 (use-package dockerfile-mode)
+(prefer-coding-system 'utf-8)
