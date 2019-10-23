@@ -112,6 +112,14 @@
   :init
   (load-theme 'hc-zenburn t))
 
+;; doom modeline.  Don't forget to run (all-the-icons-install-fonts)
+(use-package all-the-icons)
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq doom-modeline-icon (display-graphic-p))
+  (setq doom-modeline-major-mode-icon nil))
+
 ;;manually-set variables
 (global-set-key [insert] 'realgud:pdb)
 ;;goto line
