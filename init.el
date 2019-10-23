@@ -14,6 +14,8 @@
 ;;natural scrolling
 (setq mwheel-scroll-up-function 'scroll-down)
 (setq mwheel-scroll-down-function 'scroll-up)
+;;sort dired by numbers, not sure what all the switches do
+(setq dired-listing-switches "-1aGh1vl")
 
 ;;I don't really want to accidentally suspend emacs a lot
 ;;If this comes up a lot in terminal, redefine the key instead
@@ -47,6 +49,7 @@
     (company-anaconda company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
                       (company-dabbrev-code company-gtags company-etags company-keywords)
                       company-oddmuse company-dabbrev)))
+ '(doc-view-continuous t)
  '(face-font-family-alternatives
    (quote
     (("Monospace" "courier" "fixed")
