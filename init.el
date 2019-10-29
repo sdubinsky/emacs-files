@@ -202,6 +202,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-hook 'org-mode-hook 'visual-line-mode)
   (global-font-lock-mode 1)
   (setq org-startup-indented 1)
+  (setq org-return-follows-link 1)
   :diminish org-indent-mode
   :bind
 	("C-c l" . org-store-link)
@@ -281,7 +282,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package auto-virtualenv
 	:config
 	(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
+	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
+  (setq projectile-switch-project-action #'projectile-dired))
 (use-package pyvenv
   :hook (python-mode . pyvenv-mode))
 ;;pianobar
