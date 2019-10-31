@@ -200,6 +200,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-hook 'org-mode-hook 'visual-line-mode)
   (global-font-lock-mode 1)
   (setq org-startup-indented 1)
+  (setq org-return-follows-link 1)
   :diminish org-indent-mode
   :bind
 	("C-c l" . org-store-link)
@@ -320,6 +321,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
                                     :test-prefix "test_")
 	(projectile-mode)
   (put 'projectile-project-test-cmd 'safe-local-variable #'stringp)
+  (setq projectile-switch-project-action #'projectile-dired)
   :diminish projectile-mode)
 (use-package ripgrep)
 
