@@ -282,8 +282,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package auto-virtualenv
 	:config
 	(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv)
-  (setq projectile-switch-project-action #'projectile-dired))
+	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
 (use-package pyvenv
   :hook (python-mode . pyvenv-mode))
 ;;pianobar
@@ -324,6 +323,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
                                     :test-prefix "test_")
 	(projectile-mode)
   (put 'projectile-project-test-cmd 'safe-local-variable #'stringp)
+  (setq projectile-switch-project-action #'projectile-dired)
   :diminish projectile-mode)
 (use-package ripgrep)
 
