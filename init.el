@@ -13,6 +13,8 @@
 (setq initial-scratch-message "")
 ;;sort dired by numbers, not sure what all the switches do
 (setq dired-listing-switches "-1aGh1vl")
+(prefer-coding-system 'utf-8)
+(put 'narrow-to-region 'disabled nil)
 
 ;;I don't really want to accidentally suspend emacs a lot
 ;;If this comes up a lot in terminal, redefine the key instead
@@ -30,7 +32,6 @@
 
 ;;speed up tramp
 (setq tramp-default-method "ssh")
-
 
 ;;set font to Hack, if it exists
 (add-to-list 'default-frame-alist '(font . "Hack-12"))
@@ -115,7 +116,8 @@
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-icon (display-graphic-p))
-  (setq doom-modeline-major-mode-icon nil))
+  (setq doom-modeline-unicode-fallback nil)
+  (setq doom-modeline-buffer-encoding nil))
 
 ;;manually-set variables
 (global-set-key [insert] 'realgud:pdb)
@@ -572,4 +574,3 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :bind(:map dired-mode-map ("/" . dired-narrow-regexp)))
 
 (use-package dockerfile-mode)
-(prefer-coding-system 'utf-8)
