@@ -283,6 +283,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 	(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
 (use-package pyvenv
+  :diminish t
   :hook (python-mode . pyvenv-mode))
 ;;pianobar
 (use-package pianobar
