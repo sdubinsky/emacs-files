@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    sudo apt install curl apcalc screen ghc vlc git i3-wm cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2
+    sudo apt install curl apcalc screen ghc vlc git i3-wm i3status cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep
     sudo add-apt-repository ppa:kelleyk/emacs
     sudo apt update && sudo apt -y install emacs26
     sudo rm /usr/bin/emacs
@@ -62,9 +62,13 @@ cd ~
 rm -rf ruby-install*
 
 ruby-install ruby
+bash
 chruby ruby
 gem install bundler
 
 cd ~
 mkdir code
 
+#Things to do after:
+#1. Install the updated version of i3: https://i3wm.org/downloads/
+#2. set natural scrolling: https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager
