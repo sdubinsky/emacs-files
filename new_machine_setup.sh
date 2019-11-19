@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    sudo apt install curl apcalc screen ghc vlc git i3-wm i3status cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep
+    sudo apt install curl apcalc screen ghc vlc git i3-wm i3status cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags
     sudo add-apt-repository ppa:kelleyk/emacs
     sudo apt update && sudo apt -y install emacs26
     sudo rm /usr/bin/emacs
