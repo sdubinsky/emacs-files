@@ -15,6 +15,8 @@
 (setq dired-listing-switches "-1aGh1vl")
 (prefer-coding-system 'utf-8)
 (put 'narrow-to-region 'disabled nil)
+;; set large file warning threshold higher
+(setq large-file-warning-threshold 300000000)
 
 ;;native scrolling - https://emacs.stackexchange.com/questions/26988/set-scroll-amount-for-mouse-wheel-in-emacs
 ;;(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -58,7 +60,7 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t)
+ '(ledger-clear-whole-transactions t t)
  '(ledger-reports
    (quote
     (("bal" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) bal not Equity -E --current")
