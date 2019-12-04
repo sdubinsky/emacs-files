@@ -40,6 +40,8 @@
 
 ;;set font to Hack, if it exists
 (add-to-list 'default-frame-alist '(font . "Hack-12"))
+(setq my-ledger-file "~/Documents/finances/ledger-2019.dat")
+(load "~/emacs-files/locals.el")
 
 ;; disable splash screen
 (custom-set-variables
@@ -49,7 +51,7 @@
  ;; If there is more than one, they won't work right.
  '(company-backends
    (quote
-    (company-anaconda company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
+    (company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
                       (company-dabbrev-code company-gtags company-etags company-keywords)
                       company-oddmuse company-dabbrev)))
  '(doc-view-continuous t)
@@ -60,14 +62,6 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t t)
- '(ledger-reports
-   (quote
-    (("bal" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) bal not Equity -E --current")
-     ("reg" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) reg not Equity -S -date --current")
-     ("balr" "%(binary) [[ledger-mode-flags]] -f %(ledger-file) bal not Equity -E --real --current")
-     ("payee" "%(binary) -f %(ledger-file) reg @%(payee)")
-     ("account" "%(binary) -f %(ledger-file) reg %(account)"))))
  '(org-capture-templates
    (quote
     (("t" "todo list" entry
@@ -77,13 +71,13 @@
       (file "~/org/notes.org")
       "%(org-read-date): %^{note}" :prepend t :immediate-finish t)
      ("l" "insert item into ledger" plain
-      (file "~/Documents/finances/ledger/ledger-2019.dat")
+      (file my-ledger-file)
       "%(org-read-date) %^{Payee}
 	%^{Account|Expenses:Eating Out|Expenses:Groceries|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities}  %^{Currency|NIS |$}%^{Amount}
 	%^{Payer|Assets:BHP Checking|Assets:Cash}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+    (doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc intero omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
  '(pyvenv-mode nil)
  '(safe-local-variable-values (quote ((encoding . utf-8)))))
 
@@ -111,6 +105,10 @@
 	(require 'use-package))
 (setq use-package-always-ensure t)
 (setq use-package-always-defer t)
+
+;;system packages - from the use-package readme
+(use-package use-package-ensure-system-package)
+
 ;;dark high-contrast theme
 (use-package hc-zenburn-theme
   :init
@@ -331,7 +329,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (put 'projectile-project-test-cmd 'safe-local-variable #'stringp)
   (setq projectile-switch-project-action #'projectile-dired)
   :diminish projectile-mode)
-(use-package ripgrep)
+(use-package ripgrep
+  :ensure-system-package ripgrep)
 
 (use-package bundler)
 ;;next set of packages are for rails
@@ -554,6 +553,13 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package ledger-mode
   :mode ("\\.dat\\'"
          "\\.ledger\\'")
+  :config
+  (setq ledger-reports
+        `(("bal" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " bal not Equity -E --current"))
+     ("reg" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " reg not Equity -S -date --current"))
+     ("balr" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " bal not Equity -E --real --current"))
+     ("payee" "%(binary) -f %(my-ledger-file) reg @%(payee)")
+     ("account" "%(binary) -f %(my-ledger-file) reg %(account)")))
   :custom (ledger-clear-whole-transactions t))
 
 (use-package restclient
