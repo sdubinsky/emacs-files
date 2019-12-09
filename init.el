@@ -43,6 +43,15 @@
 (setq my-ledger-file "~/Documents/finances/ledger-2019.dat")
 (load "~/emacs-files/locals.el")
 
+;;Load autoinstalled packages(require 'package)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa-stable.milkbox.net/packages/")))
+(package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+
 ;; disable splash screen
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -52,8 +61,8 @@
  '(company-backends
    (quote
     (company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
-                      (company-dabbrev-code company-gtags company-etags company-keywords)
-                      company-oddmuse company-dabbrev)))
+                  (company-dabbrev-code company-gtags company-etags company-keywords)
+                  company-oddmuse company-dabbrev)))
  '(doc-view-continuous t)
  '(face-font-family-alternatives
    (quote
@@ -90,16 +99,6 @@
 ;;Tab size
 (setq-default tab-width 2)
 (require 'package)
-
-;;Load autoinstalled packages(require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa-stable.milkbox.net/packages/")))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-(unless (package-installed-p 'use-package)
-	(package-install 'use-package))
 
 (eval-when-compile
 	(require 'use-package))
@@ -329,8 +328,9 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (put 'projectile-project-test-cmd 'safe-local-variable #'stringp)
   (setq projectile-switch-project-action #'projectile-dired)
   :diminish projectile-mode)
+
 (use-package ripgrep
-  :ensure-system-package ripgrep)
+  :ensure-system-package (rg . ripgrep))
 
 (use-package bundler)
 ;;next set of packages are for rails
