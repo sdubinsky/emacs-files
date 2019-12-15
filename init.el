@@ -180,6 +180,17 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (setq company-require-match nil)
 	:diminish company-mode)
 
+;;advice https://framagit.org/steckerhalter/steckemacs.el/blob/master/steckemacs.el
+(use-package advice
+  :ensure nil
+  :config
+  (defadvice kill-buffer (around kill-buffer-around-advice activate)
+    "Bury scratch instead of killing it"
+    (let ((buffer-to-kill (ad-get-arg 0)))
+      (if (equal buffer-to-kill "*scratch*")
+          (bury-buffer)
+        ad-do-it))))
+
 ;;undo-tree-mode better undoing and redoing
 (use-package undo-tree
   :bind (("C-c z" . undo-tree-visualize))
