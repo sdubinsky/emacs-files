@@ -82,7 +82,7 @@
      ("l" "insert item into ledger" plain
       (file my-ledger-file)
       "%(org-read-date) %^{Payee}
-	%^{Account|Expenses:Eating Out|Expenses:Groceries|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities}  %^{Currency|NIS |$}%^{Amount}
+	%^{Account|Expenses:Eating Out|Expenses:Groceries|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical}  %^{Currency|NIS |$}%^{Amount}
 	%^{Payer|Assets:BHP Checking|Assets:Cash}" :empty-lines 1))))
  '(package-selected-packages
    (quote
