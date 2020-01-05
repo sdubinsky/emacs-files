@@ -40,7 +40,7 @@
 
 ;;set font to Hack, if it exists
 (add-to-list 'default-frame-alist '(font . "Hack-12"))
-(setq my-ledger-file "~/Documents/finances/ledger-2019.dat")
+(setq my-ledger-file "~/Documents/finances/ledger-2020.dat")
 (load "~/emacs-files/locals.el")
 
 ;;Load autoinstalled packages(require 'package)
