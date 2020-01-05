@@ -148,6 +148,11 @@
   (exec-path-from-shell-initialize))
   :defer 0)
 
+(use-package sql
+  :ensure nil
+  :config
+  (sql-set-product 'postgres))
+
 ;;flycheck
 (use-package flycheck
   :defer 0
