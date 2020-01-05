@@ -82,13 +82,17 @@
      ("l" "insert item into ledger" plain
       (file my-ledger-file)
       "%(org-read-date) %^{Payee}
-	%^{Account|Expenses:Eating Out|Expenses:Groceries|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical}  %^{Currency|NIS |$}%^{Amount}
+	%^{Account|Expenses:Eating Out|Expenses:Groceries|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment}  %^{Currency|NIS |$}%^{Amount}
 	%^{Payer|Assets:BHP Checking|Assets:Cash}" :empty-lines 1))))
  '(package-selected-packages
    (quote
     (doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
  '(pyvenv-mode nil)
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+ '(safe-local-variable-values
+   (quote
+    ((realgud:pdb-command-name . "python /home/shalom/code/buzz/run-intent-tests.py")
+     (projectile-project-test-cmd . "BUZZ_SERVICE_NAME='intent_svc' pytest ./intent_svc/ -x -W ignore::DeprecationWarning")
+     (encoding . utf-8)))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
