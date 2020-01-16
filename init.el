@@ -135,6 +135,12 @@
 ;; cycle through amounts of spacing - from http://pragmaticemacs.com/emacs/cycle-spacing/
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
+;;calculate miles per gallon
+(defun mpg (old new liters)
+  "Calculate MPG."
+  (interactive "nold mileage: \nnnew mileage: \nnliters: ")
+  (insert (format ";;%.2f MPG.\nODO reading: %d" (* (/ (- new old) liters) 2.352) new)))
+
 (setq nxml-sexp-element-flag t)
 (use-package diminish)
 
