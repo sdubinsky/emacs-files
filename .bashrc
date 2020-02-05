@@ -118,7 +118,7 @@ chruby ruby
 
 HISTSIZE=500000 HISTFILESIZE=5000000
 
-export PATH="/usr/local/bin:$PATH:~/.local/bin"
+export PATH="/usr/local/bin:$PATH:$HOME/.local/bin:/usr/games"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 

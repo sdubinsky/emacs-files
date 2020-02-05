@@ -16,7 +16,7 @@
 (prefer-coding-system 'utf-8)
 (put 'narrow-to-region 'disabled nil)
 ;; set large file warning threshold higher
-(setq large-file-warning-threshold 300000000)
+(setq large-file-warning-threshold 900000000)
 
 ;;native scrolling - https://emacs.stackexchange.com/questions/26988/set-scroll-amount-for-mouse-wheel-in-emacs
 ;;(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
@@ -45,7 +45,7 @@
 
 ;;Load autoinstalled packages(require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa-stable.milkbox.net/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
