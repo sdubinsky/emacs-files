@@ -69,6 +69,8 @@ gem install bundler
 cd ~
 mkdir code
 
-#Things to do after:
-#1. Install the updated version of i3: https://i3wm.org/downloads/
-#2. set natural scrolling: https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager
+echo Things to do after:
+echo "1: Install the updated version of i3: https://i3wm.org/downloads/"
+echo "2a: set natural scrolling(libinput): https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager"
+echo "2b: set natural scrolling(evdev): https://forums.fedoraforum.org/showthread.php?298702-How-to-set-up-system-wide-Natural-Scrolling-Reverse-Scrolling-for-a-mouse-in-Fedora"
+echo "to check which driver, run xinput to find the id of the mouse, then xinput list-props mouse_id to see which driver is listed."
