@@ -83,7 +83,7 @@
       (file my-ledger-file)
       "%(org-read-date) %^{Payee}
 	%^{Account|Expenses:Eating Out|Expenses:Groceries|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment}  %^{Currency|NIS |$}%^{Amount}
-	%^{Payer|Assets:BHP Checking|Assets:Cash}" :empty-lines 1))))
+	%^{Payer|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover}" :empty-lines 1))))
  '(package-selected-packages
    (quote
     (doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
@@ -582,6 +582,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
         `(("bal" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " bal not Equity -E --current"))
      ("reg" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " reg not Equity -S -date --current"))
      ("balr" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " bal not Equity -E --real --current"))
+     ("salary" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " reg 'BHP Checking' --limit 'payee=~/Colabo/' -S date --current -b 'this month'"))
      ("payee" "%(binary) -f %(my-ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(my-ledger-file) reg %(account)")))
   :custom (ledger-clear-whole-transactions t))
