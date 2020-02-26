@@ -139,7 +139,7 @@
 (defun mpg (old new liters)
   "Calculate MPG."
   (interactive "nold mileage: \nnnew mileage: \nnliters: ")
-  (insert (format ";;%.2f MPG.\nODO reading: %d" (* (/ (- new old) liters) 2.352) new)))
+  (insert (format ";;%.2f liters\n;;%.2f MPG.\n;;ODO: %d" liters (* (/ (- new old) liters) 2.352) new)))
 
 (setq nxml-sexp-element-flag t)
 (use-package diminish)
