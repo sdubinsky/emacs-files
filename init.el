@@ -71,6 +71,7 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
  '(inhibit-startup-screen t)
+ '(ledger-clear-whole-transactions t)
  '(org-capture-templates
    (quote
     (("t" "todo list" entry
@@ -181,7 +182,10 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :modes python-mode)
   (add-to-list 'flycheck-checkers 'python-pyflakes))
 
-
+;;tabnine-better autocomplete
+(use-package company-tabnine
+  :config
+  (setq company-tabnine-always-trigger nil))
 
 ;;Company-mode - autocompletion
 (use-package company
@@ -189,6 +193,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (add-hook 'after-init-hook 'global-company-mode)
 	:config
   (push 'company-robe company-backends)
+  (push 'company-tabnine company-backends)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 5)
