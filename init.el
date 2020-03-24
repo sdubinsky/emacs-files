@@ -60,9 +60,9 @@
  ;; If there is more than one, they won't work right.
  '(company-backends
    (quote
-    (company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
-                  (company-dabbrev-code company-gtags company-etags company-keywords)
-                  company-oddmuse company-dabbrev)))
+    (company-tabnine company-robe company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
+                     (company-dabbrev-code company-keywords)
+                     company-oddmuse company-dabbrev)))
  '(doc-view-continuous t)
  '(face-font-family-alternatives
    (quote
@@ -70,8 +70,9 @@
      ("courier" "CMU Typewriter Text" "fixed")
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed"))))
+ '(global-company-mode t)
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t)
+ '(ledger-clear-whole-transactions t t)
  '(org-capture-templates
    (quote
     (("t" "todo list" entry
@@ -87,7 +88,7 @@
 	%^{Payer|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover}" :empty-lines 1))))
  '(package-selected-packages
    (quote
-    (doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+    (company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
  '(pyvenv-mode nil)
  '(safe-local-variable-values
    (quote
@@ -196,7 +197,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (push 'company-tabnine company-backends)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 5)
   (setq company-require-match nil)
 	:diminish company-mode)
 
