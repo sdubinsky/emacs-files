@@ -25,6 +25,9 @@
 ;;If this comes up a lot in terminal, redefine the key instead
 ;;from https://www.gnu.org/software/emacs/manual/html_node/emacs/Disabling.html#Disabling
 (global-set-key (kbd "C-z") nil)
+
+;;this is just obnoxious
+(global-set-key (kbd "C-v") nil)
 ;;conservative scrolling
 (setq scroll-step            1
       scroll-conservatively  10000)
