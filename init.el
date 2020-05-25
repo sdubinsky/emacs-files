@@ -617,3 +617,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :bind(:map dired-mode-map ("/" . dired-narrow-regexp)))
 
 (use-package dockerfile-mode)
+
+(use-package arm-mode
+  :load-path "elpa/arm-mode/"
+  :mode ("\\.s\\'"))
