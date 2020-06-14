@@ -1,9 +1,12 @@
 #!/bin/sh
 
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    sudo /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
+	  sudo dpkg -i ./keyring.deb
+	  echo "deb https://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
     sudo add-apt-repository ppa:kelleyk/emacs
     sudo apt update
-    sudo apt -y install curl apcalc screen ghc vlc git i3-wm i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename
+    sudo apt -y install curl apcalc screen ghc vlc git i3 i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename emacs26
     sudo rm /usr/bin/emacs
     sudo ln -s $(which emacs26) /usr/bin/emacs
     systemctl --user enable emacs
@@ -37,6 +40,8 @@ ln -s ~/emacs-files/.bashrc ~/.bashrc
 ln -s ~/emacs-files/.bash_profile ~/.bash_profile
 ln -s ~/emacs-files/.profile ~/.profile
 ln -s ~/emacs-files/.bash_aliases ~/.bash_aliases
+touch emacs-files/locals.el
+sudo systemctl --user restart emacs
 
 mkdir -p ~/.emacs.d
 ln -s ~/emacs-files/init.el ~/.emacs.d/init.el
@@ -66,7 +71,6 @@ cd ~
 mkdir code
 
 echo Things to do after:
-echo "1: Install the updated version of i3: https://i3wm.org/downloads/"
-echo "2a: set natural scrolling(libinput): https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager"
-echo "2b: set natural scrolling(evdev): https://forums.fedoraforum.org/showthread.php?298702-How-to-set-up-system-wide-Natural-Scrolling-Reverse-Scrolling-for-a-mouse-in-Fedora"
+echo "1a: set natural scrolling(libinput): https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager"
+echo "1b: set natural scrolling(evdev): https://forums.fedoraforum.org/showthread.php?298702-How-to-set-up-system-wide-Natural-Scrolling-Reverse-Scrolling-for-a-mouse-in-Fedora"
 echo "to check which driver, run xinput to find the id of the mouse, then xinput list-props mouse_id to see which driver is listed."
