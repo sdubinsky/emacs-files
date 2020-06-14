@@ -11,10 +11,6 @@ if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     systemctl --user enable redshift
     systemctl --user start redshift
 
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
-    rm google-chrome-stable_current_amd64.deb
-
 elif [ "$(uname -s)" == "Darwin" ]; then
     xcode-select --install
 
