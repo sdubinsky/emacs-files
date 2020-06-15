@@ -14,8 +14,8 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=1000000                   # big big history
-export HISTFILESIZE=1000000               # big big history
+export HISTSIZE=10000000                   # big big history
+export HISTFILESIZE=10000000               # big big history
 shopt -s histappend
 
 # check the window size after each command and, if necessary,
