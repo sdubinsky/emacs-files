@@ -131,4 +131,20 @@ export EDITOR="emacs"
 
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+export WORKON_HOME="$HOME/.virtualenvs"
+pyenv shell 3.7.3
+source $(which virtualenvwrapper.sh)
+
 fortune | cowsay
+
+export NVM_DIR="/home/shalom/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/shalom/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/shalom/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/shalom/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/shalom/Downloads/google-cloud-sdk/completion.bash.inc'; fi

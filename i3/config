@@ -171,20 +171,15 @@ bindsym XF86Switch_VT_1 exec amixer sset Master toggle; exec amixer sset Headpho
 
 # Sreen brightness controls
 # TODO: find correct key codes using xev, then the keysym using xmodmap
-# https://askubuntu.com/questions/1060147/how-can-i-adjust-the-screen-brightness-in-i3wm-on-ubuntu-16-04
-bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
+bindsym XF86Switch_VT_11 exec light -A 20 # increase screen brightness
+bindsym XF86Switch_VT_12 exec light -U 20 # decrease screen brightness
 
-exec synclient VertScrollDelta=-70
-exec synclient TapButton3=2
-exec xinput set-prop $(xinput list --id-only 'pointer:Logitech USB Receiver') 277 1
-
-exec syndaemon -i 0.5 -t -K -R -d
+exec_always xinput set-prop 'pointer:Logitech USB Receiver' 'Evdev Scrolling Distance' -1 -1 -1
 
 #emacs client
 bindsym $mod+m exec emacsclient -c
 #set wallpaper
-exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
+#exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
 
 #wifi applet
 exec --no-startup-id nm-applet
@@ -192,6 +187,6 @@ exec --no-startup-id nm-applet
 #detect monitors
 exec_always xrandr --auto
 
-exec_always xrandr --output HDMI-1 --left-of eDP-1 --output DP-1 --auto --left-of HDMI-1
+exec_always ~/.screenlayout/trimonitor.sh
 
 exec_always setxkbmap -layout us,il -option 'grp:shifts_toggle'
