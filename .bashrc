@@ -56,11 +56,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34m\]\!:[\j]\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34m\]\u:\033[01;34m\]\w\[\033[00m\] \$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\ $ '
 fi
 unset color_prompt force_color_prompt
+
+
+if [ -n "$SSH_CLIENT" ]; then
+    PS1="\e[47m$PS1\e[m"
+fi
 
 # history in every shell
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
