@@ -171,8 +171,9 @@ bindsym XF86Switch_VT_1 exec amixer sset Master toggle; exec amixer sset Headpho
 
 # Sreen brightness controls
 # TODO: find correct key codes using xev, then the keysym using xmodmap
-bindsym XF86Switch_VT_11 exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86Switch_VT_12 exec xbacklight -dec 20 # decrease screen brightness
+# https://askubuntu.com/questions/1060147/how-can-i-adjust-the-screen-brightness-in-i3wm-on-ubuntu-16-04
+bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
 
 exec synclient VertScrollDelta=-70
 exec synclient TapButton3=2
