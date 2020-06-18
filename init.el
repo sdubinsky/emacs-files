@@ -379,6 +379,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 (use-package web-mode
   :defer 0
+  :config
+  (setq web-mode-enable-auto-closing t)
 	:mode
 	("\\.phtml\\'" . web-mode)
 	("\\.tpl\\.php\\'" . web-mode)
