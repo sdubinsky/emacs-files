@@ -23,7 +23,7 @@ elif [ "$(uname -s)" == "Darwin" ]; then
     xcode-select --install
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install ffmpeg android-platform-tools cowsay fortune gcc ledger make markdown mongodb pandoc postgresql python wget youtube-dl syncthing rename 
+    brew install ffmpeg android-platform-tools cowsay fortune gcc ledger make markdown mongodb pandoc postgresql python wget youtube-dl syncthing rename curl
 
     brew install --HEAD universal-ctags
     brew link universal-ctags
@@ -74,6 +74,10 @@ gem install bundler
 
 cd ~
 mkdir code
+
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+
 
 echo Things to do after:
 echo "1a: set natural scrolling(libinput): https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager"
