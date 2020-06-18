@@ -95,7 +95,8 @@
  '(pyvenv-mode nil)
  '(safe-local-variable-values
    (quote
-    ((realgud:pdb-command-name . "python /home/shalom/code/buzz/run-intent-tests.py")
+    ((projectile-project-test-cmd . "BUZZ_THEME=barclays BUZZ_SERVICE_NAME=intent_svc pytest -s /home/shalom/code/buzz/intent_svc/ -W ignore::DeprecationWarning -m barclays_tests -x")
+     (realgud:pdb-command-name . "python /home/shalom/code/buzz/run-intent-tests.py")
      (projectile-project-test-cmd . "BUZZ_SERVICE_NAME='intent_svc' pytest ./intent_svc/ -x -W ignore::DeprecationWarning")
      (encoding . utf-8)))))
 
