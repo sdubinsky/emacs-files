@@ -184,9 +184,15 @@ bindsym $mod+m exec emacsclient -c
 #wifi applet
 exec --no-startup-id nm-applet
 
+#sound applet
+exec --no-startup-id volumeicon
+
+#bluetooth applet
+exec --no-startup-id blueman-applet
+
 #detect monitors
 exec_always xrandr --auto
 
-exec_always ~/.screenlayout/trimonitor.sh
+exec_always ~/.screenlayout/stacked.sh
 
 exec_always setxkbmap -layout us,il -option 'grp:shifts_toggle'
