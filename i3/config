@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -158,6 +158,14 @@ bar {
 #Default workspace layout type
 workspace_layout tabbed
 
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+
 # Set up fn+Fn modifier keys(e.g. Fn+F3)
 # from: https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 # NB:For now, these respond to the function keys without modifiers.
@@ -169,13 +177,16 @@ bindsym XF86AudioMute exec amixer sset Master toggle; exec amixer sset Headphone
 bindsym XF86Switch_VT_1 exec amixer sset Master toggle; exec amixer sset Headphone unmute; exec amixer sset Speaker unmute
 
 
+
 # Sreen brightness controls
 # TODO: find correct key codes using xev, then the keysym using xmodmap
-bindsym XF86Switch_VT_11 exec light -A 20 # increase screen brightness
-bindsym XF86Switch_VT_12 exec light -U 20 # decrease screen brightness
+bindsym XF86Switch_VT_11 exec light -A 4 # increase screen brightness
+bindsym XF86Switch_VT_12 exec light -U 4 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 4 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 4 # decrease screen brightness
 
 exec_always xinput set-prop 'pointer:Logitech USB Receiver' 'Evdev Scrolling Distance' -1 -1 -1
-
+exec_always xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Scrolling Distance' -113 -113
 #emacs client
 bindsym $mod+m exec emacsclient -c
 #set wallpaper
