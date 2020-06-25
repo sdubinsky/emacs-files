@@ -140,7 +140,7 @@
 (global-set-key (kbd "C-x x") '(lambda () "frame-back one" (interactive) (other-window -1)))
 ;; cycle through amounts of spacing - from http://pragmaticemacs.com/emacs/cycle-spacing/
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
-
+(setq x-super-keysym 'meta)
 ;;calculate miles per gallon
 (defun mpg (old new liters)
   "Calculate MPG."
@@ -191,6 +191,12 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package company-tabnine
   :config
   (setq company-tabnine-always-trigger nil))
+
+;;org-roam autocomplete
+(use-package company-org-roam
+  :config
+  (push 'company-org-roam company-backends))
+
 
 ;;Company-mode - autocompletion
 (use-package company
@@ -627,3 +633,20 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package arm-mode
   :load-path "elpa/arm-mode/"
   :mode ("\\.s\\'"))
+
+;;Org-roam, for zettelkasten
+(use-package org-roam
+      :hook
+      (after-init . org-roam-mode)
+      :config
+      (setq org-roam-link-title-format "R:%s")
+      :custom
+      (org-roam-directory "~/org notes and todos/roam")
+      :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n j" . org-roam-jump-to-index)
+               ("C-c n b" . org-roam-switch-to-buffer)
+               ("C-c n g" . org-roam-graph))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))))
