@@ -640,6 +640,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
       (after-init . org-roam-mode)
       :config
       (setq org-roam-link-title-format "R:%s")
+      (setq org-roam-completion-system 'ido)
       :custom
       (org-roam-directory "~/org notes and todos/roam")
       :bind (:map org-roam-mode-map
