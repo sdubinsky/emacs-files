@@ -6,7 +6,7 @@ if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	  echo "deb https://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
     sudo add-apt-repository ppa:kelleyk/emacs
     sudo apt update
-    sudo apt -y install curl apcalc screen ghc vlc git i3 i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename emacs26 light
+    sudo apt -y install curl apcalc screen ghc vlc git i3 i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename emacs26 light sqlite3
     #This is for light, the program to change the backlight
     sudo usermod -a -G video $USER
     wget -o "hackttf.zip" https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
