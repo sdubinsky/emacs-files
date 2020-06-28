@@ -641,6 +641,12 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
       :config
       (setq org-roam-link-title-format "R:%s")
       (setq org-roam-completion-system 'ido)
+      (setq org-roam-capture-templates 
+            '(("d" "default" plain (function org-roam-capture--get-point)
+               "#+ROAM_TAGS: %?"
+               :file-name "%<%Y%m%d%H%M%S>-${slug}"
+               :head "#+TITLE: ${title}\n"
+               :unnarrowed t)))
       :custom
       (org-roam-directory "~/org notes and todos/roam")
       :bind (:map org-roam-mode-map
