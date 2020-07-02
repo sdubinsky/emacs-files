@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -184,12 +184,13 @@ bindsym XF86Switch_VT_12 exec light -U 4 # decrease screen brightness
 bindsym XF86MonBrightnessUp exec light -A 4 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 4 # decrease screen brightness
 
-exec_always xinput set-prop 'pointer:Logitech USB Receiver' 'Evdev Scrolling Distance' -1 -1 -1
-exec_always xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Two-Finger Scrolling' 1 1
-exec_always xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Scrolling Distance' -113 113
-exec_always xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Edge Scrolling' 0 0 0
+exec_always --no-startup-id xinput set-prop 'pointer:Logitech USB Receiver' 'Evdev Scrolling Distance' -1 -1 -1
+exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Two-Finger Scrolling' 1 1
+exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Scrolling Distance' -113 -113
+exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Edge Scrolling' 0 0 0
 #emacs client
 bindsym $mod+m exec emacsclient -c
+#
 #set wallpaper
 #exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
 
@@ -203,8 +204,11 @@ exec --no-startup-id volumeicon
 exec --no-startup-id blueman-applet
 
 #detect monitors
-exec_always xrandr --auto
+exec_always --no-startup-id xrandr --auto
 
-exec_always ~/.screenlayout/stacked.sh
+exec_always --no-startup-id ~/.screenlayout/stacked.sh
 
-exec_always setxkbmap -layout us,il -option 'grp:shifts_toggle'
+workspace 1 output eDP-1-1
+workspace 2 output HDMI-0
+
+exec_always --no-startup-id setxkbmap -layout us,il -option 'grp:shifts_toggle'
