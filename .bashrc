@@ -138,6 +138,8 @@ export WORKON_HOME="$HOME/.virtualenvs"
 pyenv shell 3.7.3
 source $(which virtualenvwrapper.sh)
 
+# disable touchpad
+syndaemon -i 1 -t -K -R -d
 fortune | cowsay
 
 export NVM_DIR="/home/shalom/.nvm"
