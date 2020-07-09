@@ -140,7 +140,7 @@
 (global-set-key (kbd "C-x x") '(lambda () "frame-back one" (interactive) (other-window -1)))
 ;; cycle through amounts of spacing - from http://pragmaticemacs.com/emacs/cycle-spacing/
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
-(setq x-super-keysym 'meta)
+
 ;;calculate miles per gallon
 (defun mpg (old new liters)
   "Calculate MPG."
@@ -387,6 +387,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :defer 0
   :config
   (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-pairing t)
 	:mode
 	("\\.phtml\\'" . web-mode)
 	("\\.tpl\\.php\\'" . web-mode)

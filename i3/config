@@ -190,7 +190,8 @@ exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad'
 exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Edge Scrolling' 0 0 0
 #emacs client
 bindsym $mod+m exec emacsclient -c
-#
+#firefox - *b*rowser
+bindsym $mod+b exec firefox
 #set wallpaper
 #exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
 
@@ -198,7 +199,7 @@ bindsym $mod+m exec emacsclient -c
 exec --no-startup-id nm-applet
 
 #sound applet
-exec --no-startup-id volumeicon
+exec --no-startup-id pa-applet
 
 #bluetooth applet
 exec --no-startup-id blueman-applet
