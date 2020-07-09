@@ -64,7 +64,7 @@ unset color_prompt force_color_prompt
 
 
 if [ -n "$SSH_CLIENT" ]; then
-    PS1="\e[47m$PS1\e[m"
+    PS1="\[\e[47m\]$PS1\[\e[m\]"
 fi
 
 # history in every shell
