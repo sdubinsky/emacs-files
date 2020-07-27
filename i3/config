@@ -186,6 +186,7 @@ bindsym XF86MonBrightnessUp exec light -A 4 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 4 # decrease screen brightness
 
 exec_always --no-startup-id xinput set-prop 'pointer:Logitech USB Receiver' 'Evdev Scrolling Distance' -1 -1 -1
+exec_always --no-startup-id xinput set-prop 'pointer:Logitech Wireless Mouse' 'libinput Natural Scrolling Enabled' 1
 exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Two-Finger Scrolling' 1 1
 exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Scrolling Distance' -113 -113
 exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad' 'Synaptics Edge Scrolling' 0 0 0
