@@ -171,9 +171,9 @@ bindsym $mod+minus scratchpad show
 # NB:For now, these respond to the function keys without modifiers.
 # The actual solution might be to just rebind them all, but I hope not.
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
-bindsym XF86AudioMute exec amixer sset Master toggle; exec amixer sset Headphone unmute; exec amixer sset Speaker unmute
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86Switch_VT_1 exec amixer sset Master toggle; exec amixer sset Headphone unmute; exec amixer sset Speaker unmute
 
 
