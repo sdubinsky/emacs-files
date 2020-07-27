@@ -388,6 +388,9 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :config
   (setq web-mode-enable-auto-closing t)
   (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-auto-expanding t)
+  (setq web-mode-enable-auto-opening t)
+  (setq web-mode-enable-auto-quoting t)
 	:mode
 	("\\.phtml\\'" . web-mode)
 	("\\.tpl\\.php\\'" . web-mode)
