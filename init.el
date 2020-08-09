@@ -42,7 +42,7 @@
 (setq tramp-default-method "ssh")
 
 ;;set font to Hack, if it exists
-(add-to-list 'default-frame-alist '(font . "Hack-12"))
+(add-to-list 'default-frame-alist '(font . "Hack-16"))
 (setq my-ledger-file "~/Documents/finances/ledger/ledger-2020.dat")
 (load "~/emacs-files/locals.el")
 
@@ -87,8 +87,8 @@
      ("l" "insert item into ledger" plain
       (file my-ledger-file)
       "%(org-read-date) %^{Payee}
-	%^{Account|Expenses:Groceries|Expenses:Eating Out|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment|Accounts:Bankroll|Accounts:Poker|Accounts:BHP Credit}  %^{Currency|NIS |$}%^{Amount}
-	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker}" :empty-lines 1))))
+	%^{Account|Expenses:Groceries|Expenses:Eating Out|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment|Expenses:Fencing Database:Hosting|Accounts:Bankroll|Accounts:Poker|Accounts:BHP Credit|Assets:Cash|Assets:Ally Checking}  %^{Currency|NIS |$}%^{Amount}
+	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker|Income:Tutoring}" :empty-lines 1))))
  '(package-selected-packages
    (quote
     (company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
