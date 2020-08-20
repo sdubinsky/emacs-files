@@ -45,7 +45,7 @@
 (setq tramp-default-method "ssh")
 
 ;;set font to Hack, if it exists
-(add-to-list 'default-frame-alist '(font . "Hack-16"))
+(add-to-list 'default-frame-alist '(font . "Hack-12"))
 (setq my-ledger-file "~/Documents/finances/ledger/ledger-2020.dat")
 (load "~/emacs-files/locals.el")
 
@@ -78,7 +78,7 @@
      ("helv" "helvetica" "arial" "fixed"))))
  '(global-company-mode t)
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t t)
+ '(ledger-clear-whole-transactions t)
  '(org-capture-templates
    (quote
     (("t" "todo list" entry
