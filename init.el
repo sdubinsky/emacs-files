@@ -11,6 +11,9 @@
 (setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'meta)
 (setq initial-scratch-message "")
+
+;;scratch buffer default mode - https://emacs.stackexchange.com/questions/53875/change-scratch-buffer-to-org-mode-by-default
+(setq initial-major-mode 'text-mode)
 ;;sort dired by numbers, not sure what all the switches do
 (setq dired-listing-switches "-1aGh1vl")
 (prefer-coding-system 'utf-8)
