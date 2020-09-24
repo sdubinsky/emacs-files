@@ -215,5 +215,5 @@ exec_always --no-startup-id ~/.screenlayout/stacked.sh
 
 workspace 1 output eDP-1-1
 workspace 2 output HDMI-0
-
+exec_always --no-start-up-id xrandr --output eDP-1-1 --primary
 exec_always --no-startup-id setxkbmap -layout us,il -option 'grp:shifts_toggle'

@@ -65,23 +65,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-backends
-   (quote
-    (company-tabnine company-robe company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
-                     (company-dabbrev-code company-keywords)
-                     company-oddmuse company-dabbrev)))
+   '(company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
+                  (company-dabbrev-code company-keywords)
+                  company-oddmuse company-dabbrev))
  '(doc-view-continuous t)
  '(face-font-family-alternatives
-   (quote
-    (("Monospace" "courier" "fixed")
+   '(("Monospace" "courier" "fixed")
      ("courier" "CMU Typewriter Text" "fixed")
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
-     ("helv" "helvetica" "arial" "fixed"))))
- '(global-company-mode t)
+     ("helv" "helvetica" "arial" "fixed")))
  '(inhibit-startup-screen t)
- '(ledger-clear-whole-transactions t)
  '(org-capture-templates
-   (quote
-    (("t" "todo list" entry
+   '(("t" "todo list" entry
       (file "~/org/todo.org")
       "* TODO (%(org-read-date)): %^{task}" :prepend t :immediate-finish t)
      ("n" "Take a note" item
@@ -91,17 +86,15 @@
       (file my-ledger-file)
       "%(org-read-date) %^{Payee}
 	%^{Account|Expenses:Groceries|Expenses:Eating Out|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment|Expenses:Fencing Database:Hosting|Accounts:Bankroll|Accounts:Poker|Accounts:BHP Credit|Assets:Cash|Assets:Ally Checking}  %^{Currency|NIS |$}%^{Amount}
-	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker|Income:Tutoring}" :empty-lines 1))))
+	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker|Income:Tutoring}" :empty-lines 1)))
  '(package-selected-packages
-   (quote
-    (dumb-jump company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process)))
+   '(htmlize poetry company-org-roam dumb-jump company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))
  '(pyvenv-mode nil)
  '(safe-local-variable-values
-   (quote
-    ((projectile-project-test-cmd . "BUZZ_THEME=barclays BUZZ_SERVICE_NAME=intent_svc pytest -s /home/shalom/code/buzz/intent_svc/ -W ignore::DeprecationWarning -m barclays_tests -x")
+   '((projectile-project-test-cmd . "BUZZ_THEME=barclays BUZZ_SERVICE_NAME=intent_svc pytest -s /home/shalom/code/buzz/intent_svc/ -W ignore::DeprecationWarning -m barclays_tests -x")
      (realgud:pdb-command-name . "python /home/shalom/code/buzz/run-intent-tests.py")
      (projectile-project-test-cmd . "BUZZ_SERVICE_NAME='intent_svc' pytest ./intent_svc/ -x -W ignore::DeprecationWarning")
-     (encoding . utf-8)))))
+     (encoding . utf-8))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -206,8 +199,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :init
   (add-hook 'after-init-hook 'global-company-mode)
 	:config
+  (add-hook prog-mode-hook (lambda () (push 'company-tabnine company-backends)))
   (push 'company-robe company-backends)
-  (push 'company-tabnine company-backends)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
   (setq company-require-match nil)
@@ -326,10 +319,15 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package auto-virtualenv
 	:config
 	(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+  (add-hook 'projectile-after-switch-project-hook (lambda () (exec-path-from-shell-copy-env "PATH")))
 	(add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
 (use-package pyvenv
   :diminish t
   :hook (python-mode . pyvenv-mode))
+(use-package poetry
+  :config
+  (poetry-tracking-mode t))
+
 ;;pianobar
 (use-package pianobar
 	:config
@@ -406,9 +404,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;ruby stuff
 (use-package chruby
-  :hook ruby-mode
-  :config
-  (chruby "2.5.3"))
+  :hook ruby-mode)
 (use-package robe
 	:config
 	(add-hook 'ruby-mode-hook 'robe-mode)
@@ -428,13 +424,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :diminish yas-mode)
 
 (use-package yasnippet-snippets)
-
-(use-package csharp-mode)
-(use-package omnisharp
-  :after company
-  :config
-  (add-hook 'csharp-mode-hook 'omnisharp-mode)
-  (add-to-list 'company-backends 'company-omnisharp))
 
 (setq inf-ruby-default-implementation "pry")
 ;;Custom elisp functions
@@ -488,7 +477,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (add-hook 'ruby-mode-hook 
 					(lambda () 
 						(ruby-end-mode 1)
-						(diminish 'ruby-end-mode)))
+						(diminish 'ruby-end-mode)
+            (chruby-use-corresponding)))
 (add-hook 'ruby-mode-hook 'hs-minor-mode)
 
 
@@ -607,6 +597,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
      ("salary" ,(concat "%(binary) [[ledger-mode-flags]] -f " my-ledger-file " reg 'BHP Checking' --limit 'payee=~/Colabo/' -S date --current -b 'this month'"))
      ("payee" "%(binary) -f %(my-ledger-file) reg @%(payee)")
      ("account" "%(binary) -f %(my-ledger-file) reg %(account)")))
+  
   :custom (ledger-clear-whole-transactions t))
 
 (use-package restclient
@@ -668,3 +659,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :defer 0
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
+(use-package htmlize
+  :config
+  (setq htmlize-output-type 'inline-css))
