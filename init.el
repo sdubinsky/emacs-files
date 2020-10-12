@@ -155,9 +155,8 @@
   )
 
 (use-package exec-path-from-shell
-  :config
-  (when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+  :init
+  (exec-path-from-shell-initialize)
   :defer 0)
 
 (use-package sql
