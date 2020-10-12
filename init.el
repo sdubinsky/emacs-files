@@ -65,7 +65,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-backends
-   '(company-robe company-bbdb company-nxml company-css company-eclim company-semantic company-cmake company-xcode company-clang company-capf company-files
+   '(company-robe company-bbdb company-nxml company-css company-semantic company-cmake company-clang company-capf company-files
                   (company-dabbrev-code company-keywords)
                   company-oddmuse company-dabbrev))
  '(doc-view-continuous t)
@@ -88,7 +88,7 @@
 	%^{Account|Expenses:Groceries|Expenses:Eating Out|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment|Expenses:Fencing Database:Hosting|Accounts:Bankroll|Accounts:Poker|Accounts:BHP Credit|Assets:Cash|Assets:Ally Checking}  %^{Currency|NIS |$}%^{Amount}
 	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker|Income:Tutoring}" :empty-lines 1)))
  '(package-selected-packages
-   '(htmlize poetry company-org-roam dumb-jump company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode haskell-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))
+   '(list-utils htmlize poetry company-org-roam dumb-jump company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))
  '(pyvenv-mode nil)
  '(safe-local-variable-values
    '((projectile-project-test-cmd . "BUZZ_THEME=barclays BUZZ_SERVICE_NAME=intent_svc pytest -s /home/shalom/code/buzz/intent_svc/ -W ignore::DeprecationWarning -m barclays_tests -x")
@@ -301,20 +301,28 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
         ("i" . god-local-mode)))
 
 ;;Haskell
-(use-package haskell-mode
-	:config
-	(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-	(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-	;;indent/dedent region
-	(define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
-	(define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
-	(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+(use-package haskell-tng-mode
+  :ensure nil
+  :load-path "/home/deus-ex/.emacs.d/haskell-tng.el/"
+  :mode ((rx ".hs" eos) . haskell-tng-mode)
 
-(use-package ghc
   :config
-  :hook (haskell-mode . ghc-comp-init))
-(use-package company-ghc
-  :after ghc)
+  (require 'haskell-tng-extra)
+  (require 'haskell-tng-extra-abbrev)
+  (require 'haskell-tng-extra-hideshow)
+  (require 'haskell-tng-extra-company)
+  (require 'haskell-tng-extra-projectile)
+  (require 'haskell-tng-extra-yasnippet)
+  ;; (require 'haskell-tng-extra-cabal-mode)
+  (require 'haskell-tng-extra-stack)
+
+  :bind
+  (:map
+   haskell-tng-mode-map
+   ("RET" . haskell-tng-newline)
+   ("C-c c" . haskell-tng-compile)
+   ("C-c e" . next-error)))
+
 ;;Python
 (use-package auto-virtualenv
 	:config
