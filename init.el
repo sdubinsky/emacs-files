@@ -129,7 +129,7 @@
   (setq doom-modeline-buffer-encoding nil))
 
 ;;manually-set variables
-(global-set-key [insert] 'realgud:pdb)
+(global-set-key [insert] 'realgud:pry)
 ;;goto line
 (global-set-key "\C-l" 'goto-line)
 ;;go one fram backward
@@ -229,9 +229,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (put 'realgud:pdb-command-name 'safe-local-variable #'stringp)
   (setq realgud:pdb-command-name "python"))
 (use-package realgud-pry
-  :after realgud)
-(use-package realgud-byebug
-  :after realgud)
+  :hook ruby-mode)
+
 
 ;;org-mode settings
 (use-package org
