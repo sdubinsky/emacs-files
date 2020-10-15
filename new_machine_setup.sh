@@ -43,19 +43,13 @@ ln -s ~/emacs-files/.profile ~/.profile
 ln -s ~/emacs-files/.bash_aliases ~/.bash_aliases
 touch emacs-files/locals.el
 sudo systemctl --user restart emacs
-
 mkdir -p ~/.emacs.d
 ln -s ~/emacs-files/init.el ~/.emacs.d/init.el
 ln -s ~/emacs-files/emacs.service ~/.config/systemd/user/emacs.service
 cp emacs-files/emacs.service ~/.config/systemd/user/emacs.service
-
-wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
-tar -xzvf chruby-0.3.9.tar.gz
-cd chruby-0.3.9/
-sudo make install
-cd ~
-rm -rf chruby*
-
+bash
+asdf plugin add ruby
+asdf install ruby 2.7.2
 
 gem install bundler
 
