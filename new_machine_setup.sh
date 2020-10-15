@@ -23,20 +23,16 @@ elif [ "$(uname -s)" == "Darwin" ]; then
     xcode-select --install
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install ffmpeg android-platform-tools cowsay fortune gcc ledger make markdown mongodb pandoc postgresql python wget youtube-dl syncthing rename curl
-
-    brew install --HEAD universal-ctags
-    brew link universal-ctags
-
-    wget https://emacsformacosx.com/emacs-builds/Emacs-26.3-universal.dmg
-    hdiutil mount Emacs-26.3-universal.dmg
+    brew install ffmpeg android-platform-tools cowsay fortune gcc ledger make markdown mongodb pandoc postgresql python wget youtube-dl syncthing rename curl tmux mosh git cowsay fortune rename ripgrep sqlite3 apcalc
+    wget https://emacsformacosx.com/emacs-builds/Emacs-27.1-1-universal.dmg
+    hdiutil mount Emacs-27.1.1-universal.dmg
     sudo cp -r /Volumes/Emacs/Emacs.app/ /Applications/Emacs.app
     hidutil unmount /Volumes/Emacs
-    rm Emacs-26.2-universal.dmg
+    rm Emacs-27.1.1-universal.dmg
 fi
 
 git config --global user.name "Shalom Dubinsky"
-git config --global user.email "smdubinsky@gmail.com"
+git config --global user.email "shalom.dubinsky@verbit.ai"
 
 cd ~
 git clone https://github.com/sdubinsky/emacs-files.git
