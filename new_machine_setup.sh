@@ -23,7 +23,7 @@ elif [ "$(uname -s)" == "Darwin" ]; then
     xcode-select --install
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install ffmpeg android-platform-tools cowsay fortune gcc ledger make markdown mongodb pandoc postgresql python wget youtube-dl syncthing rename curl tmux mosh git cowsay fortune rename ripgrep sqlite3 apcalc
+    brew install ffmpeg android-platform-tools cowsay fortune gcc ledger make markdown mongodb pandoc postgresql python wget youtube-dl syncthing rename curl tmux mosh git cowsay fortune rename ripgrep sqlite3 apcalc coreutils asdf
     wget https://emacsformacosx.com/emacs-builds/Emacs-27.1-1-universal.dmg
     hdiutil mount Emacs-27.1.1-universal.dmg
     sudo cp -r /Volumes/Emacs/Emacs.app/ /Applications/Emacs.app
@@ -56,16 +56,7 @@ sudo make install
 cd ~
 rm -rf chruby*
 
-wget -O ruby-install-0.7.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.7.0.tar.gz
-tar -xzvf ruby-install-0.7.0.tar.gz 
-cd ruby-install-0.7.0/
-sudo make install
-cd ~
-rm -rf ruby-install*
 
-ruby-install ruby
-bash
-chruby ruby
 gem install bundler
 
 cd ~
