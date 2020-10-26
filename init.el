@@ -12,6 +12,10 @@
 (setq mac-command-modifier 'meta)
 (setq initial-scratch-message "")
 
+;;move windows with shift-arrow
+;;https://stackoverflow.com/questions/16607791/emacs-move-around-split-windows-in-a-specified-direction
+(windmove-default-keybindings)
+
 ;;scratch buffer default mode - https://emacs.stackexchange.com/questions/53875/change-scratch-buffer-to-org-mode-by-default
 (setq initial-major-mode 'text-mode)
 ;;sort dired by numbers, not sure what all the switches do
@@ -75,9 +79,10 @@
      ("Sans Serif" "helv" "helvetica" "arial" "fixed")
      ("helv" "helvetica" "arial" "fixed")))
  '(inhibit-startup-screen t)
+ '(org-agenda-files '("~/org notes and todos/todo.org"))
  '(org-capture-templates
    '(("t" "todo list" entry
-      (file "~/org/todo.org")
+      (file "~/org notes and todos/todo.org")
       "* TODO (%(org-read-date)): %^{task}" :prepend t :immediate-finish t)
      ("n" "Take a note" item
       (file "~/org/notes.org")
@@ -198,7 +203,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :init
   (add-hook 'after-init-hook 'global-company-mode)
 	:config
-  (add-hook prog-mode-hook (lambda () (push 'company-tabnine company-backends)))
+  (add-hook 'prog-mode-hook (lambda () (push 'company-tabnine company-backends)))
   (push 'company-robe company-backends)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
@@ -240,6 +245,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   (global-font-lock-mode 1)
   (setq org-startup-indented 1)
   (setq org-return-follows-link 1)
+  (setq org-directory "~/org notes and todos")
   :diminish org-indent-mode
   :bind
 	("C-c l" . org-store-link)
@@ -628,7 +634,8 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;from http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/
 (use-package dired-narrow
-  :bind(:map dired-mode-map ("/" . dired-narrow-regexp)))
+  :bind
+  (:map dired-mode-map ("/" . dired-narrow-regexp)))
 
 (use-package dockerfile-mode)
 
@@ -669,3 +676,10 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package htmlize
   :config
   (setq htmlize-output-type 'inline-css))
+
+(use-package expand-region
+  :bind
+  ("C-=" . er/expand-region))
+
+(use-package slim-mode)
+(use-package coffee-mode)
