@@ -117,9 +117,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby ruby
 
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
