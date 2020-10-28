@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -e
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     sudo /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
 	  sudo dpkg -i ./keyring.deb
@@ -18,6 +18,10 @@ if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     systemctl --user start emacs
     systemctl --user enable redshift
     systemctl --user start redshift
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+
+    . ~/.asdf/asdf.sh
+    . ~/.asdf/completions/asdf.sh
 
 elif [ "$(uname -s)" == "Darwin" ]; then
     xcode-select --install
@@ -29,6 +33,10 @@ elif [ "$(uname -s)" == "Darwin" ]; then
     sudo cp -r /Volumes/Emacs/Emacs.app/ /Applications/Emacs.app
     hidutil unmount /Volumes/Emacs
     rm Emacs-27.1.1-universal.dmg
+
+    . $(brew --prefix asdf)/asdf.sh
+    . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+
 fi
 
 git config --global user.name "Shalom Dubinsky"
@@ -47,7 +55,7 @@ mkdir -p ~/.emacs.d
 ln -s ~/emacs-files/init.el ~/.emacs.d/init.el
 ln -s ~/emacs-files/emacs.service ~/.config/systemd/user/emacs.service
 cp emacs-files/emacs.service ~/.config/systemd/user/emacs.service
-bash
+
 asdf plugin add ruby
 asdf install ruby 2.7.2
 
