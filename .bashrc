@@ -117,18 +117,18 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
 
 HISTSIZE=500000 HISTFILESIZE=5000000
 
 export PATH="/usr/local/bin:$PATH:$HOME/.local/bin:/usr/games"
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
 
 export EDITOR="emacs"
 
 export HOMEBREW_NO_INSTALL_CLEANUP=1
+
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
 
 fortune | cowsay
