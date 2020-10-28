@@ -9,19 +9,17 @@ if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     sudo apt -y install curl apcalc screen ghc vlc git i3 i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename emacs27 light sqlite3
     #This is for light, the program to change the backlight
     sudo usermod -a -G video $USER
-    wget -o "hackttf.zip" https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
+    wget -O "hackttf.zip" https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
     unzip "hackttf.zip"
     sudo cp -r "ttf" /usr/local/share/fonts
     sudo rm /usr/bin/emacs
     sudo ln -s $(which emacs27) /usr/bin/emacs
-    systemctl --user enable emacs
-    systemctl --user start emacs
     systemctl --user enable redshift
     systemctl --user start redshift
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 
     . ~/.asdf/asdf.sh
-    . ~/.asdf/completions/asdf.sh
+    . ~/.asdf/completions/asdf.bash
 
 elif [ "$(uname -s)" == "Darwin" ]; then
     xcode-select --install
@@ -44,17 +42,19 @@ git config --global user.email "shalom.dubinsky@verbit.ai"
 
 cd ~
 git clone https://github.com/sdubinsky/emacs-files.git
-rm .bashrc .bash_profile .bash_aliases .profile
+rm -f .bashrc .bash_profile .bash_aliases .profile
 ln -s ~/emacs-files/.bashrc ~/.bashrc
 ln -s ~/emacs-files/.bash_profile ~/.bash_profile
 ln -s ~/emacs-files/.profile ~/.profile
 ln -s ~/emacs-files/.bash_aliases ~/.bash_aliases
 touch emacs-files/locals.el
-sudo systemctl --user restart emacs
 mkdir -p ~/.emacs.d
-ln -s ~/emacs-files/init.el ~/.emacs.d/init.el
-ln -s ~/emacs-files/emacs.service ~/.config/systemd/user/emacs.service
-cp emacs-files/emacs.service ~/.config/systemd/user/emacs.service
+if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    ln -s ~/emacs-files/init.el ~/.emacs.d/init.el
+    ln -s ~/emacs-files/emacs.service ~/.config/systemd/user/emacs.service
+    systemctl --user enable emacs
+    systemctl --user start emacs
+fi
 
 asdf plugin add ruby
 asdf install ruby 2.7.2
