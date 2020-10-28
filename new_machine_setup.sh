@@ -52,8 +52,6 @@ mkdir -p ~/.emacs.d
 if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     ln -s ~/emacs-files/init.el ~/.emacs.d/init.el
     ln -s ~/emacs-files/emacs.service ~/.config/systemd/user/emacs.service
-    systemctl --user enable emacs
-    systemctl --user start emacs
 fi
 
 asdf plugin add ruby
@@ -72,3 +70,4 @@ echo Things to do after:
 echo "1a: set natural scrolling(libinput): https://askubuntu.com/questions/1122513/how-to-add-natural-inverted-mouse-scrolling-in-i3-window-manager"
 echo "1b: set natural scrolling(evdev): https://forums.fedoraforum.org/showthread.php?298702-How-to-set-up-system-wide-Natural-Scrolling-Reverse-Scrolling-for-a-mouse-in-Fedora"
 echo "to check which driver, run xinput to find the id of the mouse, then xinput list-props mouse_id to see which driver is listed."
+echo "run `emacs` to download all the packages, then run `systemctl --user enable emacs && systemctl --user start emacs` to start the server"
