@@ -35,6 +35,7 @@
 
 ;;this is just obnoxious
 (global-set-key (kbd "C-v") nil)
+(global-set-key (kbd "M-v") nil)
 ;;conservative scrolling
 (setq scroll-step            1
       scroll-conservatively  10000)
@@ -189,13 +190,15 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;tabnine-better autocomplete
 (use-package company-tabnine
+  :demand
   :config
+  (add-hook 'prog-mode-hook (lambda () (add-to-list 'company-backends #'company-tabnine)))
   (setq company-tabnine-always-trigger nil))
 
 ;;org-roam autocomplete
 (use-package company-org-roam
   :config
-  (push 'company-org-roam company-backends))
+  (add-to-list 'company-org-roam 'company-backends))
 
 
 ;;Company-mode - autocompletion
@@ -203,8 +206,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :init
   (add-hook 'after-init-hook 'global-company-mode)
 	:config
-  (add-hook 'prog-mode-hook (lambda () (push 'company-tabnine company-backends)))
-  (push 'company-robe company-backends)
   (setq company-dabbrev-downcase nil)
   (setq company-idle-delay 0)
   (setq company-require-match nil)
@@ -634,6 +635,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;from http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/
 (use-package dired-narrow
+  :demand
   :bind
   (:map dired-mode-map ("/" . dired-narrow-regexp)))
 
