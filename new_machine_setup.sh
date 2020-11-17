@@ -4,9 +4,19 @@ if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     sudo /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
 	  sudo dpkg -i ./keyring.deb
 	  echo "deb https://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" | sudo tee /etc/apt/sources.list.d/sur5r-i3.list
+
+    #install chromium
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A
+
+    sudo ln -s /home/deus-ex/emacs-files/debian.list /etc/apt/sources/list.d/debian.list
+    sudo ln -s /home/deus-ex/emacs-files/chromium.pref /etc/apt/preferences.d/chromium.pref 
+
     sudo add-apt-repository ppa:kelleyk/emacs
     sudo apt update
-    sudo apt -y install curl apcalc screen ghc vlc git i3 i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename emacs27 light sqlite3
+    sudo apt -y install curl apcalc screen ghc vlc git i3 i3status i3lock cowsay fortune-mod postgresql postgresql-server-dev-all cowsay adb feh xserver-xorg-input-synaptics redshift exiftool net-tools python python2 syncthing dmenu ripgrep universal-ctags rename emacs27 light sqlite3 chromium
     #This is for light, the program to change the backlight
     sudo usermod -a -G video $USER
     wget -O "hackttf.zip" https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip

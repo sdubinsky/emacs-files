@@ -193,7 +193,7 @@ exec_always --no-startup-id xinput set-prop 'pointer:SynPS/2 Synaptics TouchPad'
 #emacs client
 bindsym $mod+m exec emacsclient -c
 #firefox - *b*rowser
-bindsym $mod+b exec firefox
+bindsym $mod+b exec chromium
 #set wallpaper
 #exec --no-startup-id feh --bg-scale /home/deus-ex/Downloads/huskyonlake.jpg
 
