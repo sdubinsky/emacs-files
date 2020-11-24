@@ -117,9 +117,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-. $(brew --prefix asdf)/asdf.sh
-. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
-
+if [ "$(uname -s)" == "Darwin" ]; then
+    . $(brew --prefix asdf)/asdf.sh
+    . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+fi
 HISTSIZE=500000 HISTFILESIZE=5000000
 
 export PATH="/usr/local/bin:$PATH:$HOME/.local/bin:/usr/games"
