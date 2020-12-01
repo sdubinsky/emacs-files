@@ -112,9 +112,6 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-defer t)
 
-;;system packages - from the use-package readme
-(use-package use-package-ensure-system-package)
-
 ;;dark high-contrast theme
 (use-package hc-zenburn-theme
   :init
