@@ -91,16 +91,11 @@
      ("l" "insert item into ledger" plain
       (file my-ledger-file)
       "%(org-read-date) %^{Payee}
-	%^{Account|Expenses:Groceries|Expenses:Eating Out|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment|Expenses:Fencing Database:Hosting|Accounts:Bankroll|Accounts:Poker|Accounts:BHP Credit|Assets:Cash|Assets:Ally Checking}  %^{Currency|NIS |$}%^{Amount}
-	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker|Income:Tutoring}" :empty-lines 1)))
+	%^{Account|Expenses:Groceries|Expenses:Eating Out|Expenses:Transportation:Gas|Expenses:Electronica|Expenses:Apartmetn:Household Needs|Expenses:Basic Necessities|Expenses:Medical|Expenses:Entertainment|Expenses:Fencing Database:Hosting|Expenses:Fencing:Membership|Expenses:Fencing:Lessons|Accounts:Bankroll|Accounts:Poker|Accounts:BHP Credit|Accounts:BHP Checking|Assets:Cash|Assets:Ally Checking|Expenses:Tzedaka}  %^{Currency|NIS |$}%^{Amount}
+	%^{Payer|Accounts:BHP Credit|Assets:BHP Checking|Assets:Cash|Assets:Ally Checking|Accounts:Credit Cards:Discover|Accounts:Bankroll|Accounts:Poker|Income:Tutoring|Income:Salary|Accounts:Bankroll}" :empty-lines 1)))
  '(package-selected-packages
-   '(list-utils htmlize poetry company-org-roam dumb-jump company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))
- '(pyvenv-mode nil)
- '(safe-local-variable-values
-   '((projectile-project-test-cmd . "BUZZ_THEME=barclays BUZZ_SERVICE_NAME=intent_svc pytest -s /home/shalom/code/buzz/intent_svc/ -W ignore::DeprecationWarning -m barclays_tests -x")
-     (realgud:pdb-command-name . "python /home/shalom/code/buzz/run-intent-tests.py")
-     (projectile-project-test-cmd . "BUZZ_SERVICE_NAME='intent_svc' pytest ./intent_svc/ -x -W ignore::DeprecationWarning")
-     (encoding . utf-8))))
+   '(coffee-mode slim-mode expand-region list-utils htmlize poetry company-org-roam dumb-jump company-tabnine doom-modeline all-the-icons god-mode undo-tree ripgrep forge python-mode dockerfile-mode dired-narrow semantic-mode gnu-elpa-keyring-update csv rainbow-delimiters projectile restclient pdf-tools ledger-mode chruby exec-path-from-shell stripe-buffer nand2tetris-assembler nand2tetris ruby-additional mpdel company-ghc ghc omnisharp csharp-mode arduino-mode realgud-byebug realgud-pry go-mode zerodark-theme hc-zenburn-theme yas-global-mode yas-mode yasnippet-snippets diminish feature-mode auto-virtualenv anaconda-mode markdown-mode lua-mode company flycheck ini-mode bundler rspec robe rinari flx-ido web-mode projectile-rails anzu ess lua tuareg use-package haml-mode pianobar names csv-mode yasnippet yaml-mode ruby-tools ruby-end rspec-mode realgud magit json-mode hi2 guru-mode ghci-completion flymake flycheck-hdevtools f ensime company-inf-ruby browse-kill-ring+ autopair aggressive-indent ac-inf-ruby ac-haskell-process))
+ '(pyvenv-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -116,9 +111,6 @@
 	(require 'use-package))
 (setq use-package-always-ensure t)
 (setq use-package-always-defer t)
-
-;;system packages - from the use-package readme
-(use-package use-package-ensure-system-package)
 
 ;;dark high-contrast theme
 (use-package hc-zenburn-theme
@@ -647,6 +639,7 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 
 ;;Org-roam, for zettelkasten
 (use-package org-roam
+  :diminish org-roam
       :hook
       (after-init . org-roam-mode)
       :config
