@@ -14,8 +14,8 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=10000000                   # big big history
-export HISTFILESIZE=10000000               # big big history
+export HISTSIZE=100000000                   # big big history
+export HISTFILESIZE=100000000               # big big history
 shopt -s histappend
 
 # check the window size after each command and, if necessary,
@@ -117,9 +117,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-. $(brew --prefix asdf)/asdf.sh
-. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
-
+if [ "$(uname -s)" == "Darwin" ]; then
+    . $(brew --prefix asdf)/asdf.sh
+    . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+fi
 HISTSIZE=500000 HISTFILESIZE=5000000
 
 export PATH="/usr/local/bin:$PATH:$HOME/.local/bin:/usr/games"
