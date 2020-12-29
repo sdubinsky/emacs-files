@@ -116,6 +116,9 @@ fi
 if [ "$(uname -s)" == "Darwin" ]; then
     . $(brew --prefix asdf)/asdf.sh
     . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+else
+    . ~/.asdf/asdf.sh
+    . ~/.asdf/completions/asdf.bash
 fi
 HISTSIZE=500000 HISTFILESIZE=5000000
 
