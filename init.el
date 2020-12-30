@@ -679,5 +679,11 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   :bind
   ("C-=" . er/expand-region))
 
-(use-package slim-mode)
+(use-package slim-mode
+  :bind
+  ("C-c TAB" . (lambda ()
+                 (interactive)
+                 (goto-char (region-beginning))
+                 (slim-reindent-region-by 2))))
+
 (use-package coffee-mode)
