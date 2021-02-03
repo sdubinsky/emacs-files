@@ -17,7 +17,7 @@
 (windmove-default-keybindings)
 
 ;;scratch buffer default mode - https://emacs.stackexchange.com/questions/53875/change-scratch-buffer-to-org-mode-by-default
-(setq initial-major-mode 'text-mode)
+(setq initial-major-mode 'org-mode)
 ;;sort dired by numbers, not sure what all the switches do
 (setq dired-listing-switches "-1aGh1vl")
 (prefer-coding-system 'utf-8)
@@ -36,6 +36,7 @@
 ;;this is just obnoxious
 (global-set-key (kbd "C-v") nil)
 (global-set-key (kbd "M-v") nil)
+(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 ;;conservative scrolling
 (setq scroll-step            1
       scroll-conservatively  10000)
@@ -182,13 +183,6 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
   ((error line-start (file-name) ":" line ":" (message) line-end))
   :modes python-mode)
   (add-to-list 'flycheck-checkers 'python-pyflakes))
-
-;;tabnine-better autocomplete
-(use-package company-tabnine
-  :demand
-  :config
-  (add-hook 'prog-mode-hook (lambda () (add-to-list 'company-backends #'company-tabnine)))
-  (setq company-tabnine-always-trigger nil))
 
 ;;org-roam autocomplete
 (use-package company-org-roam
@@ -674,6 +668,11 @@ See URL `http://pypi.python.org/pypi/pyflakes'."
 (use-package htmlize
   :config
   (setq htmlize-output-type 'inline-css))
+
+(use-package css-mode
+  :ensure nil
+  :config
+  (setq css-indent-offset 2))
 
 (use-package expand-region
   :bind
